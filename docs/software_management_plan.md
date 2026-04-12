@@ -5,10 +5,10 @@
 | Role | Name | Responsibilities |
 |------|------|------------------|
 | **Project Manager** | Sinethemba Sitwayi | Overall coordination, schedule tracking, stakeholder communication, final report compilation, meeting logs |
-| **System Designer** | Dennis Tshepho Makua | Architectural design, database schema, UML diagrams, technology stack decisions, design rationale |
-| **Frontend Developer** | Sibahle Mhlongo | UI implementation (HTML/CSS/JS), wireframes to web pages, responsive design, client-side validation |
-| **Developer** | Yabanathi Mangala | Backend development (APIs, database integration, user authentication, review submission logic) |
-| **Developer** | Siphiwo Masilo | Backend development (maintenance reports, admin moderation tools, security, POPIA compliance) |
+| **System Designer** | Dennis Tshepho Makua | Architectural design (React + Node.js + Supabase), database schema, UML diagrams, technology stack decisions, design rationale |
+| **Frontend Developer** | Sibahle Mhlongo | Build UI with **React JS** and **CSS**, implement wireframes into components, client‑side state management, responsive design, connect to backend APIs |
+| **Developer** | Yabanathi Mangala | Backend development with **Node.js** and **Supabase Edge Functions**, database integration, **Supabase Auth** (WSU email verification), review submission logic |
+| **Developer** | Siphiwo Masilo | Backend development (maintenance reports, admin moderation tools), **Supabase Row Level Security (RLS)** policies, security, POPIA compliance |
 
 > **Note:** Both Yabanathi and Siphiwo work together on backend tasks; they split work as needed.
 
@@ -19,7 +19,7 @@
 | Milestone | Tasks | Deadline |
 |-----------|-------|----------|
 | **Phase 1 – Product Vision & Prototyping** | Product vision document, wireframes, management plan, meeting logs, GitHub setup | **Completed** |
-| **Phase 2 – Requirements & Design** | Functional/non-functional requirements, architectural diagrams, database schema, design rationale | **25 April** |
+| **Phase 2 – Requirements & Design** | Functional/non-functional requirements, architectural diagrams, database schema, design rationale | **April** |
 | **Phase 3 – Development (Semester 2)** | Frontend + backend implementation, testing, deployment | To be defined (start May) |
 | **Final Submission** | Complete report, working prototype, GitHub code freeze | |
 
@@ -80,3 +80,4 @@
 |------|---------|--------|---------|
 | 12 April 2026 | 1.0 | Yabanathi & Siphiwo | Initial management plan created for Phase 1 |
 | 12 April 2026 | 1.1 | Sinethemba | Updated task assignments and timeline for catch‑up |
+| 12 April 2026 | 1.2 | Dennis | Aligned roles with React/Node.js/Supabase stack; added Phase 2 dates |

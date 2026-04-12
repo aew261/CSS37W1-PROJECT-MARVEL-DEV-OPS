@@ -11,7 +11,7 @@ Responsibilities:Facilitates Scrum meetings (stand-ups, sprint planning, reviews
 Developers (Frontend and backend): Siphiwo and YAbanathi
 Responsibilities:Designs user interface (UI), Implements frontend features, Ensures good user experience, develops server-side logic, works with databases and APIs, ensures system functionality
 
-QA & Documentation: Tsepo
+QA & Documentation: Dennis
 Responsibilities:Tests the system for bugs and errors, ensures quality of the product, writes technical documentation, and maintains project records
 
 

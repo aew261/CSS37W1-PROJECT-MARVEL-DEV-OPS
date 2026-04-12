@@ -1,0 +1,20 @@
+# Sprint 1 Retrospective – Marvel DevOps (Res Hub)
+
+## Sprint Details
+- **Sprint Number:** 1
+- **Sprint Duration:** 5 April 2026 – 12 April 2026 (1 week – adjusted due to Phase 1 catch‑up)
+- **Team:** Sinethemba (PM), Dennis (System Designer), Sibahle (Frontend), Yabanathi (Backend), Siphiwo (Backend)
+- **Project:** Res Hub – Student Off‑Campus Residence Review & Reporting System
+
+---
+
+## Sprint Goal
+Complete Phase 1 deliverables (Product Vision, Wireframes, Management Plan, Meeting Logs) and set up the GitHub repository structure.
+
+## What Went Well ✅
+
+- **Clear role assignment** – Everyone knew their responsibilities, which reduced confusion.
+- **Good use of GitHub** – We created a clean repository structure with `docs/`, `wireframes/`, `agile/`, and a detailed `README.md`.
+- **Collaborative wireframing** – Yabanathi and Siphiwo delivered all wireframes and the description file on time.
+- **Product vision completed** – Sibahle and Sinethemba produced a well‑structured `product_vision.md` with a clear problem statement and unique value proposition.
+- **Regular communication** – Daily check‑ins via WhatsApp helped us track progress and resolve blockers quickly.

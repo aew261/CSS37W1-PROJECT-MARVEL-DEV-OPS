@@ -1,25 +1,32 @@
 # Sprint 1 Retrospective – Marvel DevOps (Res Hub)
 
 ## Sprint Details
-- **Sprint Number:** 1
-- **Sprint Duration:** 5 April 2026 – 12 April 2026 (1 week – adjusted due to Phase 1 catch‑up)
-- **Team:** Sinethemba (PM), Dennis (System Designer), Sibahle (Frontend), Yabanathi (Backend), Siphiwo (Backend)
+- **Sprint Number:** 1 (Phase 2 – Requirements & Design)
+- **Sprint Duration estimation:** * 8 hours
+- **Team:** Marvel DevOps
+  - **Product Owner:** Sibahle Mhlongo
+  - **Scrum Masters:** Sinethemba Sitwayi & Dennis Tshepho Makua (co‑facilitators)
+  - **Development Team:** Yabanathi Mangala & Siphiwo Masilo
 - **Project:** Res Hub – Student Off‑Campus Residence Review & Reporting System
 
-
 ## Sprint Goal
-Complete Phase 1 deliverables (Product Vision, Wireframes, Management Plan, Meeting Logs) and set up the GitHub repository structure.
+Complete all Phase 2 deliverables:
+1. Agile plan (`agile_plan.md`) – Sibahle
+2. Sprint backlog (`sprint_backlog.md`) – Yabanathi
+3. GitHub Project Board – Siphiwo
+4. Daily stand‑ups log (`standups.md`) – Sinethemba
+5. Sprint review & retrospective (`retrospective.md`) – Dennis
 
-## What Went Well ✅
+## What Went Well
 
-- **Clear role assignment** – Everyone knew their responsibilities, which reduced confusion.
-- **Good use of GitHub** – We created a clean repository structure with `docs/`, `wireframes/`, `agile/`, and a detailed `README.md`.
-- **Collaborative wireframing** – Yabanathi and Siphiwo delivered all wireframes and the description file on time.
-- **Product vision completed** – Sibahle and Sinethemba produced a well‑structured `product_vision.md` with a clear problem statement and unique value proposition.
-- **Regular communication** – Daily check‑ins via WhatsApp helped us track progress and resolve blockers quickly.
-- **GitHub project board used** – We have created a Kanban board or linked issues. This is a must for Phase 2.
+- **Clear ownership** – Each team member knew exactly which deliverable they were responsible for (tasks 1‑5). This prevented overlap and confusion.
+- **Agile plan (Sibahle)** – The Scrum roles were well defined, and the sprint schedule was realistic for our semester timeline.
+- **Sprint backlog (Yabanathi)** – User stories were broken into small, estimable tasks. Each task was assigned to a specific developer.
+- **GitHub Project Board (Siphiwo)** – A Kanban board was created with columns (Backlog, To Do, In Progress, Review, Done). All issues were linked to the sprint backlog.
+- **Daily stand‑ups (Sinethemba)** – The log was kept consistently via WhatsApp async check‑ins. This gave the team a daily snapshot of progress and blockers.
+- **Collaboration** – Even though tasks were divided, the team helped each other (e.g., Scrum Masters reviewed the backlog, developers tested the board).
 
-## What Could Be Improved ⚠️
+## What Could Be Improved
 
 - **Missed original deadline** – We didn't complete Phase 1 by 21 March because of poor initial planning. We had to backdate some logs and rush the last few days.
 - **Technology stack mismatch** – Early versions of the management plan used Python/Django, but the team later decided on React + Node.js + Supabase. This caused some confusion in role descriptions.

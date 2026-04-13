@@ -60,7 +60,7 @@ Complete all Phase 2 deliverables:
 - **Sibahle** – Agile plan completed and uploaded.
 - **Yabanathi** – Sprint backlog fully documented.
 - **Siphiwo** – GitHub Project Board created and linked to issues.
-- **Sinethemba** – Stand‑ups log maintained for all 10 working days.
+- **Sinethemba** – Stand‑ups log maintained.
 - **Dennis** – Retrospective compiled from team feedback.
 
 **Overall assessment:** All Phase 2 deliverables are complete and pushed to GitHub. The team is ready to start development in Sprint 2.

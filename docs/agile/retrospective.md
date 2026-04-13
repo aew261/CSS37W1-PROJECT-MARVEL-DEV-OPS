@@ -39,3 +39,38 @@ Complete all Phase 2 deliverables:
 2. **Agree on tech stack first** – Before writing any plan, the whole team must approve the stack to avoid rework.
 3. **Use GitHub Projects from day one** – Create a board, add issues, and move cards daily. This makes progress visible.
 4. **Log meetings immediately** – After each call, spend 5 minutes writing notes. Don't rely on memory.
+5. **Use GitHub Issues with due dates** – Every task in the backlog should become an issue with a clear deadline.
+## Action Items for Sprint 2 (Development – starts 4 May 2026)
+
+| Action | Assigned To | Due Date |
+|--------|-------------|----------|
+| Set up GitHub Project Board before Sprint 2 begins | Siphiwo | 12 April |
+| Create sprint backlog for development tasks | Yabanathi | 12 April |
+| Write daily stand‑ups in real time (template in `standups.md`) | Sinethemba | daily |
+| Hold Sprint Planning meeting (record in `meeting_notes.md`) | Sinethemba |  |
+| Begin React frontend + Node.js/Supabase backend implementation | Yabanathi & Siphiwo |  |
+| Conduct mid‑sprint code review | Sibahle |  |
+| End‑of‑sprint review and retrospective | Dennis | April |
+
+---
+
+## Sprint Review Summary
+
+**Presented to the team by each responsible member:**
+- **Sibahle** – Agile plan completed and uploaded.
+- **Yabanathi** – Sprint backlog fully documented.
+- **Siphiwo** – GitHub Project Board created and linked to issues.
+- **Sinethemba** – Stand‑ups log maintained for all 10 working days.
+- **Dennis** – Retrospective compiled from team feedback.
+
+**Overall assessment:** All Phase 2 deliverables are complete and pushed to GitHub. The team is ready to start development in Sprint 2.
+
+---
+
+## Approval
+
+- **Product Owner (Sibahle Mhlongo):**
+- **Scrum Masters (Sinethemba Sitwayi & Dennis Tshepho Makua):**  
+- **Development Team (Yabanathi Mangala & Siphiwo Masilo):**  
+
+All members agree that the retrospective accurately reflects Sprint 1.

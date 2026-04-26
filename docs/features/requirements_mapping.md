@@ -3,7 +3,7 @@
 This document maps the features of **Res Hub** to functional and non‑functional requirements. It ensures that every feature is backed by clear, testable criteria.
 
 
-## Legend
+## Key
 
 | Abbreviation | Meaning |
 |--------------|---------|

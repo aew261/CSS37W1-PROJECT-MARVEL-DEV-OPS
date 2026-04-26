@@ -1,6 +1,7 @@
 # Features List _ Res Hub
 
 ## 1. Core Features 
+
 ### 1.1 User Registration & Authentication 
 • Verified student registration using institutional email (e.g., WSU email) 
 • Secure login and logout functionality 
@@ -82,6 +83,7 @@ Notify users when:
 • Monitor flagged content 
 
 ## 3. Non-Functional Features 
+
 ### 3.1 Security 
 • Secure authentication (hashed passwords) 
 • Role-based access (student vs admin) 

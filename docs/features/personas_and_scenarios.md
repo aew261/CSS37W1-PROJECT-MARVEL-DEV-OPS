@@ -1,7 +1,7 @@
 ## Persona 1: Thabo (New Student Looking for Housing) 
--**Age:** 19 
--**Occupation:** First-year student at WSU (Mthatha Campus) 
--**Tech comfort:** High – uses smartphone daily 
+- **Age:** 19 
+- **Occupation:** First-year student at WSU (Mthatha Campus) 
+- **Tech comfort:** High – uses smartphone daily 
 - **Goal:** Find a safe, affordable off-campus residence within walking distance, with 
 reliable maintenance. 
 - **Pain points:** Doesn't trust university representatives; worried about hidden 
@@ -35,13 +35,13 @@ A few days later, Lerato logs back in and goes to her Favorites page to compare 
 
 
 ## Persona 3: Olwethu (System Administrator) 
--**Age**: 30 
--**Occupation**: Platform Administrator 
--**Tech comfort:** High – experienced with dashboards, databases, and system monitoring 
+- **Age**: 30 
+- **Occupation**: Platform Administrator 
+- **Tech comfort:** High – experienced with dashboards, databases, and system monitoring 
 tools 
--**Goal:** Ensure the platform is safe, reliable, and that reviews are authentic and 
+- **Goal:** Ensure the platform is safe, reliable, and that reviews are authentic and 
 respectful 
--**Pain points:** Managing inappropriate or misleading reviews; handling large volumes of 
+- **Pain points:** Managing inappropriate or misleading reviews; handling large volumes of 
 user reports; maintaining system performance and uptime 
 
 ### Scenario: Olwethu monitors reviews and platform activity 

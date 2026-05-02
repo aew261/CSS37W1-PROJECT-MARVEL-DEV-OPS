@@ -35,10 +35,13 @@ Potential Architectural Risks
 High-Level Architecture Diagram
 
 Frontend (React.js)
-    ↓
+---------------------------------------
+       ↓
 Backend (SUPABASE EDGE FUNCTION REST API)
-    ↓
+----------------------------------------
+       ↓
 Database (PostgreSQL)
+----------------------------------------
 
 Diagram Explanation
 

@@ -75,7 +75,6 @@ Summary statistics per residence:
 ### 2.3 Notifications System 
 Notify users when: 
 - Their review receives interaction 
-- Maintenance issue status changes 
 - New reviews are posted on saved residences 
 
 ### 2.4 Admin Panel 

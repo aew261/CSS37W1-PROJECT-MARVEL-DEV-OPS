@@ -11,7 +11,7 @@ This platform will allow verified WSU students to share honest, structured revie
   3. DENNIS TSHEPHO MAKUA - (SYSTEM DESIGNER)
   4. SIBAHLE MHLONGO - (FRONTEND DEVELOPER)
   5. SIPHIWO MASILO - (DEVELOPER)
-  6. Andiswa Dlamini-(Client-side and server-side Programmer)
+  6. ANDISWA DLAMINI - (CLIENT-SIDE AND SERVER-SIDE PROGRAMMER)
 ## FEATURES
   -USER AUTHENTICATION
   -DASHBOARD

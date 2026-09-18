@@ -4,6 +4,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 import { appApi } from '../api/app_api';
 import { authApi } from '../api/auth_api';
 
+
 const storage = {
     getItem: (key) => Promise.resolve(localStorage.getItem(key)),
     setItem: (key, value) => {
@@ -15,6 +16,8 @@ const storage = {
         return Promise.resolve();
     }
 };
+
+
 
 const appReducer = combineReducers({
     [appApi.reducerPath]: appApi.reducer,

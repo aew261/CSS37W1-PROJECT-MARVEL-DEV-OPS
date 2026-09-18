@@ -1,0 +1,28 @@
+/* ============================================
+   RESHUB DESIGN TOKENS
+   Pulled from the WSU ResHub style sheet
+   ============================================ */
+:root {
+  /* Core palette */
+  --color-navy: #1A2238;      /* Structure / text */
+  --color-slate: #F4F6F9;     /* Background / cards */
+  --color-gold: #E5A93C;      /* Highlights / ratings */
+  --color-white: #ffffff;
+
+  /* Status colors (issue tags / badges) */
+  --color-crimson-bg: #F8D7DA;
+  --color-crimson-text: #A32E3A;   /* "Issue" */
+
+  --color-amber-bg: #FBEAC4;
+  --color-amber-text: #8A5A12;     /* "In Progress" */
+
+  --color-green-bg: #DCEFDD;
+  --color-green-text: #2F7A3D;     /* "Resolved / Verified" */
+
+  /* Layout helpers */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-card: 0 2px 10px rgba(26, 34, 56, 0.08);
+  --font-base: "Segoe UI", system-ui, -apple-system, sans-serif;
+}

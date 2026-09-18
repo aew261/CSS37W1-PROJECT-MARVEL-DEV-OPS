@@ -81,7 +81,9 @@ function Signup() {
           {renderError('password')}
         </label>
 
-
+        <button type="submit" className={styles.submitBtn} disabled={!canSumbit}>
+          Sign Up
+        </button>
 
         <p className={styles.switchAuth}>
           Already have an account? <Link to="/login">Log in</Link>

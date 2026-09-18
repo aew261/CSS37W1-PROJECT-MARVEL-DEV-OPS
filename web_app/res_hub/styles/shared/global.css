@@ -1,0 +1,55 @@
+@import './variables.css';
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background-color: var(--color-slate);
+  color: var(--color-navy);
+}
+
+a {
+  color: inherit;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-verified,
+.status-resolved {
+  background: var(--color-green-bg);
+  color: var(--color-green-text);
+}
+
+.status-review,
+.status-in-progress {
+  background: var(--color-amber-bg);
+  color: var(--color-amber-text);
+}
+
+.status-issue {
+  background: var(--color-crimson-bg);
+  color: var(--color-crimson-text);
+}

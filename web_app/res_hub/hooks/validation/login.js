@@ -1,37 +1,32 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
-const useLoginValidation=()=>{
+const useLoginValidation = () => {
 
-    const [loginData, setLoginData]= useState({
-        student_email:'',
-        password:''
+    const [loginData, setLoginData] = useState({
+        student_email: '',
+        password: ''
     })
 
-    const [loginErrors, setLoginErrors]= useState({})
+    const [loginErrors, setLoginErrors] = useState({})
 
-    /*
-        FUNCTION VALIDATE FIELDS USING 2 PARAMETERS
-        NAME(name of the field) &
-        VALUE(value from the field)
-    */
-    const validateField=(name,value)=>{
-        let error=null
-        const trimmed = value.trim()
+    const validateField = (name, value) => {
+        let error = null
+        const trimmed = value?.trim() ?? ''
 
         const isEmail = /^[0-9]{9}@mywsu\.ac\.za$/.test(trimmed)
 
-        if(name === "student_email"){
-            if(!value || !trimmed){
+        if (name === "student_email") {
+            if (!trimmed) {
                 error = 'Student email is required'
-            }else if(!isEmail){
+            } else if (!isEmail) {
                 error = 'Invalid student email address'
             }
         }
 
-        if(name === "password"){
-            if(!value || !trimmed){
+        if (name === "password") {
+            if (!trimmed) {
                 error = 'Password is required'
-            }else if(trimmed.length < 6){
+            } else if (trimmed.length < 6) {
                 error = 'Password must be at least 6 characters'
             }
         }
@@ -39,43 +34,39 @@ const useLoginValidation=()=>{
         return error
     }
 
-    const handleChange=(name, value)=>{
-        setLoginData((prev)=>({...prev, [name]:value}))
+    const handleChange = (name, value) => {
+        setLoginData((prev) => ({ ...prev, [name]: value }))
         const error = validateField(name, value)
-        setLoginErrors((prev)=>({...prev, [name]:error}))
+        setLoginErrors((prev) => ({ ...prev, [name]: error }))
     }
 
-    const validateForm=()=>{
-        let loginErrors = {}
-        let updatedData = {}
+    const validateForm = () => {
+        const errors = {}
+        const updatedData = {}
 
-        Object.keys(loginData).forEach((field)=>{
+        Object.keys(loginData).forEach((field) => {
             const value = loginData[field]
             const error = validateField(field, value)
 
-            if(error){
-                loginErrors[field] = error
-            }else{
+            if (error) {
+                errors[field] = error
+            } else {
                 updatedData[field] = value.trim()
             }
-
-            setLoginErrors(loginErrors)
-
-            let isValid =Object.keys(loginErrors).length === 0
-
-            return {isValid, updatedData}
         })
 
-
+        setLoginErrors(errors)
+        const isValid = Object.keys(errors).length === 0
+        return { isValid, updatedData }
     }
 
-    const hasErrors=Object.values(loginErrors).some((error)=>{
-        return error != null
-    })
+    const hasErrors = Object.values(loginErrors).some((error) => error != null)
 
-    const requiredFieldsFilled=loginData.student_email.trim() && loginData.password.trim()
+    const requiredFieldsFilled = loginData.student_email.trim() && loginData.password.trim()
 
-    const canSubmit= requiredFieldsFilled && !hasErrors
+    const canSubmit = requiredFieldsFilled && !hasErrors
 
-    return {loginData, loginErrors, handleChange, validateForm, canSubmit}
+    return { loginData, loginErrors, handleChange, validateForm, canSubmit }
 }
+
+export default useLoginValidation

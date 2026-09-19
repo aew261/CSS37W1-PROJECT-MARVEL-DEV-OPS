@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import useLoginValidation from '../../hooks/validation/login';
-import styles from '../../styles/components/auch.module.css';
+import styles from '../../styles/components/auth.module.css';
 
 function Login() {
   const { loginData, loginErrors, handleChange, validateForm, canSubmit } =

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import useSignupValidation from '../../hooks/validation/signup';
-import styles from '../../styles/components/auch.module.css';
+
+import styles from '../styles/components/';
 
 function Signup() {
   const { signupData, signupErrors, handleChange, validateForm, canSumbit } =

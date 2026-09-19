@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import useSignupValidation from '../../hooks/validation/signup';
-import styles from '../../styles/components/auth.module.css';
+import styles from '../../styles/components/auch.module.css';
 
 function Signup() {
   const { signupData, signupErrors, handleChange, validateForm, canSumbit } =
@@ -81,7 +81,9 @@ function Signup() {
           {renderError('password')}
         </label>
 
-
+        <button type="submit" className={styles.submitBtn} disabled={!canSumbit}>
+          Sign Up
+        </button>
 
         <p className={styles.switchAuth}>
           Already have an account? <Link to="/login">Log in</Link>

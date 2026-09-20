@@ -1,10 +1,12 @@
 .container {
-  min-height: calc(100vh - 70px - 160px); /* header + footer approx */
+  min-height: calc(100vh - 70px - 160px);
+  /* header + footer approx */
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
   background: var(--color-slate);
+
 }
 
 .card {
@@ -13,7 +15,8 @@
   box-shadow: var(--shadow-card);
   padding: 2.2rem 2rem;
   width: 100%;
-  max-width: 440px;
+  max-width: 500px;
+
 }
 
 .card h1 {
@@ -27,10 +30,6 @@
   font-size: 0.9rem;
 }
 
-.row {
-  display: flex;
-  gap: 1rem;
-}
 
 .row .field {
   flex: 1;

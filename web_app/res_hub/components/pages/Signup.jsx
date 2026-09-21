@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import {useSignupMutation} from '../../api/auth_api'
 
@@ -6,6 +6,8 @@ import useSignupValidation from '../../hooks/validation/signup';
 import styles from '../../styles/components/auch.module.css';
 
 function Signup() {
+
+  const navigate = useNavigate()
   const [handleSignup,{data, error, isLoading}]=useSignupMutation()
   const { signupData, signupErrors, handleChange, validateForm, canSumbit } =useSignupValidation();
 
@@ -23,18 +25,19 @@ function Signup() {
       }
 
      const result = await handleSignup(user_data)
-
-     console.log(result)
+      if(result.data.success){
+        navigate('/Login')
+      }
+     
 
 
 
     }catch(error){
-
+      console.log("Error: ", error)
     }
 
-    // TODO(backend): wire this up to authApi (RTK Query) or supabase auth
-    // once the signup endpoint / supabase call is ready.
-    console.log('Signup submitted:', updatedData);
+    
+    
   };
 
   const renderError = (field) => {
@@ -51,7 +54,7 @@ function Signup() {
   };
 
   useEffect(()=>{
-    console.log(signupData)
+    //console.log(signupData)
   },[signupData])
 
   return (
@@ -106,7 +109,7 @@ function Signup() {
             {renderError('password')}
           </div>
 
-          <button type="submit" className={styles.submitBtn} disabled={!canSumbit}>
+          <button type="submit" className={styles.submitBtn} disabled={!canSumbit} onClick={handleSubmit}   >
             Sign Up
           </button>
 

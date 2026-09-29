@@ -53,3 +53,54 @@ a {
   background: var(--color-crimson-bg);
   color: var(--color-crimson-text);
 }
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Make images responsive throughout the application */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  body {
+    font-size: 15px;
+  }
+
+  .app-shell {
+    width: 100%;
+  }
+
+  .app-main {
+    width: 100%;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  .status-badge {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+  body {
+    font-size: 13px;
+  }
+
+  .status-badge {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.68rem;
+  }
+}

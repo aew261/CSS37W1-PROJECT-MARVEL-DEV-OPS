@@ -1,26 +1,18 @@
 import { Link } from 'react-router-dom';
-
-const linkStyle = { color: '#fff', textDecoration: 'none' };
+import styles from './Header.module.css';
 
 function Header() {
   return (
-    <header
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '1rem 2rem',
-        background: 'var(--color-navy)',
-      }}
-    >
-      <Link to="/" style={{ ...linkStyle, fontWeight: 700 }}>
+    <header className={styles.header}>
+      <Link to="/" className={styles.logo}>
         ResHub
       </Link>
-      <nav style={{ display: 'flex', gap: '1.25rem' }}>
-        <Link to="/" style={linkStyle}>Home</Link>
-        <Link to="/search" style={linkStyle}>Search</Link>
-        <Link to="/login" style={linkStyle}>Log in</Link>
-        <Link to="/signup" style={linkStyle}>Sign up</Link>
+
+      <nav className={styles.nav}>
+        <Link to="/" className={styles.link}>Home</Link>
+        <Link to="/search" className={styles.link}>Search</Link>
+        <Link to="/login" className={styles.link}>Log in</Link>
+        <Link to="/signup" className={styles.link}>Sign up</Link>
       </nav>
     </header>
   );

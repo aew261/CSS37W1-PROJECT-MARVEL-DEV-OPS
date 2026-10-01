@@ -1,0 +1,68 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--color-navy);
+}
+
+.logo {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.link {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .header {
+    padding: 0.9rem 1.25rem;
+  }
+
+  .nav {
+    gap: 1rem;
+  }
+}
+
+/* Phones */
+@media (max-width: 600px) {
+  .header {
+    padding: 0.8rem 1rem;
+  }
+
+  .nav {
+    gap: 0.7rem;
+  }
+
+  .link {
+    font-size: 0.9rem;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 480px) {
+  .header {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.8rem 0.75rem;
+  }
+
+  .nav {
+    width: 100%;
+    justify-content: center;
+    gap: 0.9rem;
+  }
+
+  .link {
+    font-size: 0.85rem;
+  }
+}

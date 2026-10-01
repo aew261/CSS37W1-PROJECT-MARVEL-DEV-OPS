@@ -1,0 +1,41 @@
+.container {
+    border: 2px solid red;
+    padding: 1%;
+}
+
+.top_section {
+    //border: 2px solid blue;
+    display: flex;
+    justify-content: flex-end;
+    //padding: 1%;
+}
+
+.top_section button {
+    display: block;
+    width: 15%;
+    justify-self: flex-end;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.info_section {
+    //border: 2px solid green;
+}
+
+.rating_icon {
+    font-size: 1.9rem;
+}
+
+.info_wrapper {
+    //border: 2px solid blue;
+    display: flex;
+    align-items: center;
+    gap: 1%;
+    font-size: 1.2rem;
+}
+
+.info_icon {
+
+    font-size: 2rem;
+}

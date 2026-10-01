@@ -1,7 +1,7 @@
 import styles from '../../styles/components/admin_dashboard.module.css';
 
 function AdminDashboard() {
-  return (
+  return (<>
     <div className={styles.container}>
 
       <div className={styles.header}>
@@ -62,7 +62,7 @@ function AdminDashboard() {
       </section>
 
     </div>
-  );
+  </>);
 }
 
 export default AdminDashboard;

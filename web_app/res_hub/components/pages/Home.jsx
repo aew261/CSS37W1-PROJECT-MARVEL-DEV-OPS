@@ -1,37 +1,20 @@
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useFetchListingsQuery } from '../../api/app_api';
+
 import ResidenceCard from '../common/ResidenceCard';
 import styles from '../../styles/components/home.module.css';
 
 // TODO(backend): replace with real data from app_api.js once the
 // GET /residences?featured=true endpoint exists.
-const FEATURED_RESIDENCES = [
-  {
-    id: 1,
-    title: 'Bolitha Residence',
-    address: '4.5 · 10 Kingfisher str, Southernwood, Mthatha',
-    rating: 4.5,
-    status: 'Verified',
-    image: 'https://placehold.co/400x300?text=Bolitha',
-  },
-  {
-    id: 2,
-    title: 'Amaxesibe 4 Residence',
-    address: '4.5 · 198 1st avenue, ncambedlana, Mthatha',
-    rating: 4.5,
-    status: 'Verified',
-    image: 'https://placehold.co/400x300?text=Amaxesibe',
-  },
-  {
-    id: 3,
-    title: 'Nkosinathi Residence',
-    address: '4.5 · 68 4th Avenue, Norwood, Mthatha',
-    rating: 4.5,
-    status: 'Under Review',
-    image: 'https://placehold.co/400x300?text=Nkosinathi',
-  },
-];
+
 
 function Home() {
+  const {data:FEATURED_RESIDENCES,error}=useFetchListingsQuery()
+
+  useEffect(()=>{
+    console.log(FEATURED_RESIDENCES)
+  })
   return (
     <div className={styles.container}>
       <section className={styles.hero}>
@@ -46,6 +29,7 @@ function Home() {
       </section>
 
       <section className={styles.featured}>
+
         <div className={styles.featuredHeader}>
           <div>
             <h2>Featured Residences</h2>
@@ -57,10 +41,11 @@ function Home() {
         </div>
 
         <div className={styles.grid}>
-          {FEATURED_RESIDENCES.map((residence) => (
+          {FEATURED_RESIDENCES?.data.map((residence) => (
             <ResidenceCard key={residence.id} residence={residence} />
           ))}
         </div>
+        
       </section>
     </div>
   );

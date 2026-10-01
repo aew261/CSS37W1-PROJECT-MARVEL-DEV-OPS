@@ -10,13 +10,15 @@ const corsHeaders = {
 
 serve(async(req)=>{
     try{
-        if(req.method !== "POST"){
+
+        if(req.method !== "GET"){
             return new Response(JSON.stringify({
-                message:"Method not allowed",
-                status:204,
+                message:"Method not allowed"
+            }),{status:405,
                 headers:corsHeaders
-            }),{status:400})
+            })
         }
+        
 
         const authHeader = req.headers.get('Authorization')!;
         const supabase = createClient(
@@ -25,37 +27,27 @@ serve(async(req)=>{
               { global: { headers: { Authorization: authHeader } } }
         );
 
-        const body = await req.json()
-        const {student_email, password}= body
+        const { data: { user }, error } = await supabase.auth.getUser();
+        if (error || !user) return new Response('Unauthorized', { status: 401 });
 
-        const {data:loginData,error:loginError}= await supabase.auth.signInWithPassword({email: student_email, password});
+        const {data:res_data, error:residenceError}=await supabase.from("residence_listings")
+                                          .select('*')
 
-        if(loginError){
+        if(residenceError){
             return new Response(JSON.stringify({
-                error:loginError,
-                message:"Something went wrong."
-            }),{status:400,
-                headers: {
-                    ...corsHeaders,
-                    'Content-Type': 'application/json'
-                }
+                error:residenceError.message,
+                message:"Unable to fecth, refresh your page"
+            }),{satus:400,
+                headers:corsHeaders
             })
         }
 
-        return new Response(JSON.stringify({
-            success:true,
-            message:"Account created"
-        }),{status:200,
-            headers: {
-                 ...corsHeaders,
-                'Content-Type': 'application/json'
-            }
-        })
-
+        
     }catch(error){
 
         return new Response(JSON.stringify({
-            error:error.message
+            error:error.message,
+            data:res_data
         }),{status:500,
             headers: {
                 ...corsHeaders,

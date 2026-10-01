@@ -5,9 +5,10 @@ import Home from '../components/pages/Home'
 import Login from '../components/pages/Login'
 import Signup from '../components/pages/Signup'
 import Search from '../components/pages/Search'
-import AdminDashboard from '../components/admin/AdminDashboard'
 
-import protectedRoute from "../authentication/ProtectedRoute"
+import Residence_Info from "../components/pages/Residence_Info"
+
+
 import ProtectedRoute from "../authentication/ProtectedRoute"
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             
             <Route index  element={<Home/>} />
             <Route path="/search" element={<Search />} />
+            <Route path="/residence_info" element={<Residence_Info/>}/>
 
           </Route>
       </Route>

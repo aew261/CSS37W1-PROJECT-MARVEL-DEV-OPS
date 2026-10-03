@@ -25,7 +25,7 @@ function AdminDashboard() {
     { title: 'Open Maintenance Reports', value: openIssues },
   ];
 
-  return (
+  return (<>
     <div className={styles.container}>
 
       <div className={styles.header}>
@@ -155,7 +155,7 @@ function AdminDashboard() {
       </section>
 
     </div>
-  );
+  </>);
 }
 
 export default AdminDashboard;

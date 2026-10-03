@@ -1,7 +1,8 @@
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { FaChartLine, FaCloudUploadAlt, FaArrowLeft, FaSignOutAlt } from 'react-icons/fa';
 import { useAuth } from '../../authentication/AuthProvider';
-import { getInitials } from '../../authentication/authUtils';
+
+
 import AdminSearch from './AdminSearch';
 import styles from '../../styles/components/admin_layout.module.css';
 
@@ -38,7 +39,7 @@ function AdminLayout() {
 
         {/* Right: profile info + logout */}
         <div className={styles.profile}>
-          <span className={styles.avatar} aria-hidden="true">{getInitials(displayName)}</span>
+          <span className={styles.avatar} aria-hidden="true"></span>
           <div className={styles.profileText}>
             <span className={styles.profileName} title={session?.user?.email}>{displayName}</span>
             <span className={styles.profileRole}>Administrator</span>
@@ -56,6 +57,7 @@ function AdminLayout() {
         {/* ============ SIDEBAR ============ */}
         <aside className={styles.sidebar}>
           <p className={styles.sidebarLabel}>Menu</p>
+          
           <nav className={styles.sidebarNav} aria-label="Admin navigation">
             {NAV_ITEMS.map(({ to, label, icon: Icon, end }) => (
               <NavLink
@@ -78,7 +80,7 @@ function AdminLayout() {
           </Link>
         </aside>
 
-        {/* ============ PAGE CONTENT ============ */}
+        
         <main className={styles.content}>
           <Outlet />
         </main>

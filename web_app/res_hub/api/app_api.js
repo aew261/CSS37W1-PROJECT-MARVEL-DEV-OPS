@@ -1,9 +1,11 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import { supabase } from '../lib/supabase';
 
+
 export const appApi = createApi({
     reducerPath: "appApi",
     baseQuery: fetchBaseQuery({
+
         baseUrl: "https://glgrqftlgnoccabxcndo.supabase.co/functions/v1",
         prepareHeaders: async (headers, { getState }) => {
                         try {
@@ -37,3 +39,4 @@ export const appApi = createApi({
 })
 
 export const {useFetchListingsQuery}=appApi;
+       

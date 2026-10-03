@@ -22,7 +22,7 @@
 
 .statsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.2rem;
   margin-bottom: 2rem;
 }
@@ -118,5 +118,131 @@
 
   .section {
     padding: 1rem;
+  }
+}
+
+/* ===== Added for Home / Analytics ===== */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryLink {
+  background: var(--color-gold);
+  color: var(--color-navy);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-sm);
+}
+
+.primaryLink:hover {
+  background: #d49a2e;
+}
+
+.sampleNote {
+  margin: -1rem 0 1.5rem;
+  padding: 0.55rem 0.8rem;
+  background: var(--color-amber-bg);
+  color: var(--color-amber-text);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Category rating bars */
+.barList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 150px 1fr 40px;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.88rem;
+}
+
+.barLabel {
+  font-weight: 600;
+}
+
+.barTrack {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-slate);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--color-gold);
+}
+
+.barValue {
+  text-align: right;
+  font-weight: 700;
+}
+
+/* Residence table */
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #5b6472;
+  border-bottom: 1px solid #e3e7ee;
+}
+
+.table td {
+  padding: 0.8rem 0.75rem;
+  border-bottom: 1px solid #eef1f5;
+  vertical-align: middle;
+}
+
+.cellSub {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.78rem;
+  color: #5b6472;
+}
+
+.ratingCell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+
+.star {
+  color: var(--color-gold);
+}
+
+@media (max-width: 600px) {
+  .barRow {
+    grid-template-columns: 110px 1fr 34px;
+    gap: 0.6rem;
   }
 }

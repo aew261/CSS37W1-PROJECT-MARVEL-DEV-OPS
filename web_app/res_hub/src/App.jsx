@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 
 import Layout from '../components/layout/Layout'
 import Home from '../components/pages/Home'
@@ -9,14 +9,15 @@ import Search from '../components/pages/Search'
 import Residence_Info from "../components/pages/Residence_Info"
 
 
+
 import ProtectedRoute from "../authentication/ProtectedRoute"
+import GuestRoute from "../authentication/GuestRoute"
 
 function App() {
   return (
     <Routes>
 
-      <Route path='/login' element={<Login />} />
-      <Route path='/signup' element={<Signup />} />
+      {/* Pages that use the normal site Header + Footer */}
 
       <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
@@ -26,8 +27,11 @@ function App() {
             <Route path="/residence_info" element={<Residence_Info/>}/>
 
           </Route>
+
       </Route>
+
       
+
     </Routes>
   )
 }

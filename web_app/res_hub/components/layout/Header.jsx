@@ -11,8 +11,8 @@ function Header() {
       <nav className={styles.nav}>
         <Link to="/" className={styles.link}>Home</Link>
         <Link to="/search" className={styles.link}>Search</Link>
-        <Link to="/login" className={styles.link}>Log in</Link>
-        <Link to="/signup" className={styles.link}>Sign up</Link>
+        <Link to="/about" className={styles.link}>About</Link>
+        
       </nav>
     </header>
   );

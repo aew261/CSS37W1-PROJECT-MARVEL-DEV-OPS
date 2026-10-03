@@ -1,6 +1,7 @@
 import { FaStar, FaLocationDot,  } from "react-icons/fa6";
 import { IoCallSharp } from "react-icons/io5";
 
+import ResImages from "../../composites/components/ResImages";
 import residenceSt from '../../styles/components/residence_info.module.css'
 
 function Residence_Info() {
@@ -11,7 +12,7 @@ function Residence_Info() {
                 <p>Write a Review</p>
             </button>
         </section>
-
+ 
         <main>
 
             <section  className={residenceSt.info_section}  >
@@ -38,24 +39,40 @@ function Residence_Info() {
                 </div>
             </section>
 
-            <section>
+            <section className={residenceSt.preview_section}  >
 
-                <div>
+                <div className={residenceSt.category_section}  >
                     <h2>Category Ratings</h2>
-                    <div>
-                        <div>
-                            <p>Infrastucture</p>
-                            {}
+
+                    <div className={residenceSt.category_wrapper} >
+                        <div  className={residenceSt.category}  >
+                            <p>Landlord</p>
+                            {[...Array(5)].map((_,ind)=>(
+                                <FaStar key={ind} className={residenceSt.rating_icon} />
+                            ))}
                         </div>
+
+                        <div  className={residenceSt.category}  >
+                            <p>Infrastructure</p>
+                            {[...Array(5)].map((_,ind)=>(
+                                <FaStar key={ind} className={residenceSt.rating_icon} />
+                            ))}
+                        </div>
+
+                        <div  className={residenceSt.category}  >
+                            <p>Service</p>
+                            {[...Array(5)].map((_,ind)=>(
+                                <FaStar key={ind} className={residenceSt.rating_icon} />
+                            ))}
+                        </div>
+
                     </div>
+
                 </div>
 
-                <div>
+                <div className={residenceSt.photos_section}  >
                     <h2>Photos</h2>
-                    <div>
-                        ``
-                    </div
-                    >
+                    <ResImages/>
                 </div>
 
             </section>
@@ -63,6 +80,18 @@ function Residence_Info() {
             <section>
                 <h2>Student Reviews</h2>
                 <p>Reviews Submitted by verified wsu students</p>
+
+                <div>
+                    <div>
+                        <div>
+
+                        </div>
+                        <div>
+                            
+                        </div>
+                    </div>
+                </div>
+
             </section>
 
 

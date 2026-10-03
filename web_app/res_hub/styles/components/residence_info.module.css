@@ -1,5 +1,4 @@
 .container {
-    border: 2px solid red;
     padding: 1%;
 }
 
@@ -7,7 +6,7 @@
     //border: 2px solid blue;
     display: flex;
     justify-content: flex-end;
-    //padding: 1%;
+
 }
 
 .top_section button {
@@ -21,6 +20,7 @@
 
 .info_section {
     //border: 2px solid green;
+    line-height: 0;
 }
 
 .rating_icon {
@@ -38,4 +38,27 @@
 .info_icon {
 
     font-size: 2rem;
+}
+
+.preview_section {
+    //border: 2px solid green;
+    display: flex;
+}
+
+.category_section {
+    //border: 2px solid blue;
+    width: 40%;
+}
+
+.category_wrapper {
+    //border: 2px solid red;
+}
+
+.category {
+    //border: 2px solid green;
+}
+
+.photos_section {
+    //border: 2px solid red;
+    width: 60%;
 }

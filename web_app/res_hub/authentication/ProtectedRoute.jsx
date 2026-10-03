@@ -1,18 +1,24 @@
 import { Outlet, Navigate } from "react-router-dom";
 import { useAuth } from "./AuthProvider";
+import FullPageLoader from "../components/common/FullPageLoader";
 
-const ProtectedRoute=()=>{
-    const {user, mounting}=useAuth()
+// Guests -> /login.  With requireAdmin, non-admins -> / (the homepage).
+const ProtectedRoute = ({ requireAdmin = false }) => {
+    const { session, loading, isAdmin } = useAuth()
 
-    if(mounting){
-         return <div>Loading...</div>;
+    if (loading) {
+        return <FullPageLoader />
     }
 
-    if(!user){
+    if (!session) {
         return <Navigate to="/login" replace />
     }
 
-    return <Outlet/>
+    if (requireAdmin && !isAdmin) {
+        return <Navigate to="/" replace />
+    }
+
+    return <Outlet />
 }
 
 export default ProtectedRoute

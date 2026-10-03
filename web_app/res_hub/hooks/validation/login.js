@@ -13,13 +13,15 @@ const useLoginValidation = () => {
         let error = null
         const trimmed = value?.trim() ?? ''
 
-        const isEmail = /^[0-9]{9}@mywsu\.ac\.za$/.test(trimmed)
+        // Students sign up with a 9-digit WSU email (enforced in signup.js).
+        // Login accepts any well-formed email so admin/staff accounts can sign in too.
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)
 
         if (name === "student_email") {
             if (!trimmed) {
-                error = 'Student email is required'
+                error = 'Email is required'
             } else if (!isEmail) {
-                error = 'Invalid student email address'
+                error = 'Invalid email address'
             }
         }
 

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
 import ResidenceCard from '../common/ResidenceCard';
 import styles from '../../styles/components/search.module.css';
@@ -34,7 +35,8 @@ const ALL_RESIDENCES = [
 const FILTERS = ['All', 'Verified', 'Under Review'];
 
 function Search() {
-  const [query, setQuery] = useState('');
+  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get('q') ?? '');
   const [activeFilter, setActiveFilter] = useState('All');
 
   const results = useMemo(() => {

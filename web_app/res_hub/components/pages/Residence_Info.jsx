@@ -1,15 +1,18 @@
 import { FaStar, FaLocationDot,  } from "react-icons/fa6";
 import { IoCallSharp } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 import ResImages from "../../composites/components/ResImages";
 import residenceSt from '../../styles/components/residence_info.module.css'
 
 function Residence_Info() {
+    const navigate=useNavigate()
   return (<>
     <div className={residenceSt.container}  >
         <section className={residenceSt.top_section} >
-            <button>
+            <button onClick={()=>navigate('/residence_review')}  >
                 <p>Write a Review</p>
+                
             </button>
         </section>
  
@@ -77,19 +80,43 @@ function Residence_Info() {
 
             </section>
 
-            <section>
+            <section className={residenceSt.review_section}   >
                 <h2>Student Reviews</h2>
                 <p>Reviews Submitted by verified wsu students</p>
 
-                <div>
-                    <div>
-                        <div>
+                <div className={residenceSt.review_wrapper}  >
+
+                    <div className={residenceSt.review_card}   >
+                        <div className={residenceSt.review_info}  >
+                            <p>Thabo M</p>
+                            <p>2021/02/07</p>
+                        </div>
+                        <div className={residenceSt.review_content}   >
+                           <p>Hey i stayed here last year. </p> 
+
+                           <button   >
+                                <p>Helpful (3)</p>
+                           </button>
 
                         </div>
-                        <div>
-                            
+                    </div>
+
+                    <div className={residenceSt.review_card}   >
+                        <div className={residenceSt.review_info}  >
+                            <p>Thabo M</p>
+                            <p>2021/02/07</p>
+                        </div>
+                        <div className={residenceSt.review_content}   >
+                           <p>Hey i stayed here last year. </p> 
+
+                           <button   >
+                                <p>Helpful (3)</p>
+                           </button>
+
                         </div>
                     </div>
+
+
                 </div>
 
             </section>

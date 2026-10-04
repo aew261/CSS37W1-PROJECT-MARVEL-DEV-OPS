@@ -4,20 +4,26 @@ import { useEffect } from "react";
 import FullPageLoader from "../components/common/FullPageLoader";
 
 
-const ProtectedRoute = ({ requireAdmin = false }) => {
-    const {user,mounting } = useAuth()
-    
+const ProtectedRoute = () => {
+    const {session,user,mounting } = useAuth()
+
+    useEffect(()=>{
+        console.log("Hey",session)
+    })
+
     if (mounting) {
         return <FullPageLoader />
     }
 
+    
 
-    if(!user){
-        return <Navigate to="/login" replace />
+
+    if(!session){
+        return <Navigate to="/signup" replace />
     }
 
+    console.log("Session exists → allowing route");
    
-
     return <Outlet/>
       
 }

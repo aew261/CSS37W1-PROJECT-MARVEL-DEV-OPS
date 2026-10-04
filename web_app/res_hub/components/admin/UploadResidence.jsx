@@ -1,4 +1,4 @@
-
+import { useAuth } from '../../authentication/AuthProvider';
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 const MAX_IMAGE_MB = 5;
 const MAX_EXTRA_PHOTOS = 10;
@@ -34,9 +34,66 @@ const INITIAL_VALUES = {
 const USE_MOCK = import.meta.env.VITE_MOCK_UPLOAD === 'true';
 
 import { FaImage, FaTimes } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import useUploadResidences from '../../hooks/validation/uploadResidences';
 import styles from '../../styles/components/upload_residence.module.css';
 
 function UploadResidence() {
+
+    const {handleChange,uploadData}=useUploadResidences()
+    const [images,setImages]=useState({
+        cover_url:null,
+        additional:[]
+    })
+    useEffect(()=>{
+        if(uploadData){
+            //console.log(uploadData)
+        }
+
+        console.log(images)
+    },[images])
+
+    useEffect(()=>{
+        if(images){
+            handleChange("res_images", images)
+        }
+        
+    },[images])
+    const handleAmnesties=(e)=>{
+        const {value,checked}=e.target
+
+    }
+
+    const onImageUpload=(e)=>{
+        const file=e.target.files[0]
+        if(!file) return;
+
+        
+        const previewUrl = URL.createObjectURL(file);
+        
+        if (!images.cover_url) {
+            setImages((prev) => ({...prev,
+                cover_url: {
+                    file: file,
+                    preview_url: previewUrl
+                }
+            }));
+        } else {
+                setImages((prev) => ({...prev,
+                    additional: [...prev.additional,
+                        {
+                            file: file,
+                            preview_url: previewUrl
+                        }
+                    ] }
+                ));
+        }
+
+        //onsole.log(images)
+
+        //
+          
+    }
     return (
         <div className={styles.container}>
 
@@ -59,30 +116,11 @@ function UploadResidence() {
                     <input
                         type="text"
                         placeholder="e.g. Bolitha Residence"
+                        onChange={(e)=>handleChange("res_name",e.target.value)}
                     />
                 </label>
 
-                <label className={styles.field}>
-                    <span>Description *</span>
 
-                    <textarea
-                        rows={5}
-                        placeholder="Describe the residence, building, surroundings, and what students should know..."
-                    />
-
-                    <small className={styles.counter}>
-                        0/1000
-                    </small>
-                </label>
-
-                <label className={styles.field}>
-                    <span>Listing status</span>
-
-                    <select defaultValue="Under Review">
-                        <option>Under Review</option>
-                        <option>Verified</option>
-                    </select>
-                </label>
             </section>
 
 
@@ -100,7 +138,7 @@ function UploadResidence() {
 
                     <div className={styles.coverPreview}>
                         <img
-                            src="https://images.unsplash.com/photo-1560185008-b033106af5c3?w=800"
+                            src={`${images?.cover_url?.preview_url}`}
                             alt="Residence cover"
                         />
 
@@ -125,10 +163,10 @@ function UploadResidence() {
                     </p>
 
                     <ul className={styles.thumbGrid}>
-
-                        <li className={styles.thumb}>
+                        {images.additional.map((item)=>(
+                            <li className={styles.thumb}>
                             <img
-                                src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=500"
+                                src={`${item?.preview_url}`}
                                 alt="Residence room"
                             />
 
@@ -139,34 +177,8 @@ function UploadResidence() {
                                 <FaTimes />
                             </button>
                         </li>
-
-                        <li className={styles.thumb}>
-                            <img
-                                src="https://images.unsplash.com/photo-1556912167-f556f1f39fdf?w=500"
-                                alt="Residence kitchen"
-                            />
-
-                            <button
-                                type="button"
-                                className={styles.removeBtn}
-                            >
-                                <FaTimes />
-                            </button>
-                        </li>
-
-                        <li className={styles.thumb}>
-                            <img
-                                src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=500"
-                                alt="Residence bathroom"
-                            />
-
-                            <button
-                                type="button"
-                                className={styles.removeBtn}
-                            >
-                                <FaTimes />
-                            </button>
-                        </li>
+                        ))}
+                        
 
                     </ul>
 
@@ -188,9 +200,11 @@ function UploadResidence() {
                             multiple
                             accept="image/jpeg,image/png,image/webp"
                             className={styles.fileInput}
+                            onChange={onImageUpload}
                         />
                     </label>
                 </div>
+
             </section>
 
 
@@ -204,6 +218,7 @@ function UploadResidence() {
                     <input
                         type="text"
                         placeholder="e.g. 10 Kingfisher Street"
+                        onChange={(e)=>handleChange("address",e.target.value)}
                     />
                 </label>
 
@@ -216,6 +231,7 @@ function UploadResidence() {
                         <input
                             type="text"
                             placeholder="e.g. Southernwood"
+                            onChange={(e)=>handleChange("suburb",e.target.value)}
                         />
                     </label>
 
@@ -226,58 +242,14 @@ function UploadResidence() {
                         <input
                             type="text"
                             placeholder="e.g. Mthatha"
+                            onChange={(e)=>handleChange("city",e.target.value)}
                         />
                     </label>
 
                 </div>
 
 
-                <div className={styles.row}>
-
-                    <label className={styles.field}>
-                        <span>Distance from campus (km)</span>
-
-                        <input
-                            type="number"
-                            placeholder="e.g. 2.5"
-                        />
-                    </label>
-
-
-                    <label className={styles.field}>
-                        <span>Number of rooms</span>
-
-                        <input
-                            type="number"
-                            placeholder="e.g. 12"
-                        />
-                    </label>
-
-                </div>
-
-
-                <div className={styles.row}>
-
-                    <label className={styles.field}>
-                        <span>Landlord / contact person</span>
-
-                        <input
-                            type="text"
-                            placeholder="e.g. Mr. Dlamini"
-                        />
-                    </label>
-
-
-                    <label className={styles.field}>
-                        <span>Landlord contact number</span>
-
-                        <input
-                            type="tel"
-                            placeholder="e.g. 082 123 4567"
-                        />
-                    </label>
-
-                </div>
+                
 
 
                 {/* Amenities */}
@@ -287,47 +259,75 @@ function UploadResidence() {
                     <div className={styles.amenityGrid}>
 
                         <label className={styles.checkbox}>
-                            <input type="checkbox" />
+                            <input 
+                                type="checkbox" 
+                                onClick={handleAmnesties}
+                            />
                             <span>Wi-Fi</span>
                         </label>
 
                         <label className={styles.checkbox}>
-                            <input type="checkbox" />
+                            <input 
+                                type="checkbox"
+                                onClick={handleAmnesties}
+                            />
                             <span>Laundry</span>
+                            
                         </label>
 
                         <label className={styles.checkbox}>
-                            <input type="checkbox" />
+                            <input 
+                                type="checkbox"
+                                onClick={handleAmnesties}
+                           />
                             <span>Security / CCTV</span>
                         </label>
 
                         <label className={styles.checkbox}>
-                            <input type="checkbox" />
+                            <input 
+                                type="checkbox" 
+                                onClick={handleAmnesties}
+                            />
                             <span>Parking</span>
                         </label>
 
                         <label className={styles.checkbox}>
-                            <input type="checkbox" />
+                            <input 
+                                type="checkbox"
+                                onClick={handleAmnesties}
+                             />
                             <span>Furnished</span>
                         </label>
 
                         <label className={styles.checkbox}>
-                            <input type="checkbox" />
+                            <input 
+                                type="checkbox" 
+                                onClick={handleAmnesties}
+                            />
                             <span>Study area</span>
                         </label>
 
                         <label className={styles.checkbox}>
-                            <input type="checkbox" />
+                            <input 
+                                type="checkbox"
+                                onClick={handleAmnesties}
+                             />
                             <span>Backup power</span>
                         </label>
 
                         <label className={styles.checkbox}>
-                            <input type="checkbox" />
+                            <input 
+                                type="checkbox" 
+                                onClick={handleAmnesties}
+                            />
                             <span>Water tank</span>
                         </label>
 
                         <label className={styles.checkbox}>
-                            <input type="checkbox" />
+                            <input 
+                                type="checkbox" 
+                                onClick={handleAmnesties}
+                            />
                             <span>Shared kitchen</span>
                         </label>
 

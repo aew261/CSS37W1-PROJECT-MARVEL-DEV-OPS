@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext({
     session:null,
@@ -30,6 +31,7 @@ export function AuthProvider({children}){
             return data
         }catch(error){
           console.log(error)
+          return null;
         }
       }
 
@@ -53,9 +55,7 @@ export function AuthProvider({children}){
 
       checkUser();
 
-
-      const { data: sub } = supabase.auth.onAuthStateChange(
-            async(_event, session) => {
+      const { data: sub } = supabase.auth.onAuthStateChange(async(_event, session) => {
       
               setSession(session)
               if(_event==="TOKEN_REFRESHED"){
@@ -63,8 +63,13 @@ export function AuthProvider({children}){
               }
       
               if(_event === "SIGNED_IN" && session?.user?.id  ){
-                  loadProfile(session.user.id)
-                 .then(setUser)  
+                 await loadProfile(session.user.id)
+                 .then(setUser) 
+                 
+              }
+
+              if(_event === "SIGNED_OUT"){
+                
               }
       
   

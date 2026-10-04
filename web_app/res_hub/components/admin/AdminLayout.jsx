@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { FaChartLine, FaCloudUploadAlt, FaArrowLeft, FaSignOutAlt } from 'react-icons/fa';
+
 import { useAuth } from '../../authentication/AuthProvider';
 
 
@@ -13,6 +14,7 @@ const NAV_ITEMS = [
 
 function AdminLayout() {
   const navigate = useNavigate();
+  const {user}=useAuth();
   const { session, displayName, signOut } = useAuth();
 
   const handleLogout = async () => {
@@ -39,9 +41,11 @@ function AdminLayout() {
 
         {/* Right: profile info + logout */}
         <div className={styles.profile}>
-          <span className={styles.avatar} aria-hidden="true"></span>
+          <span className={styles.avatar} aria-hidden="true">
+            {`${user.first_name.charAt(0)}`}
+          </span>
           <div className={styles.profileText}>
-            <span className={styles.profileName} title={session?.user?.email}>{displayName}</span>
+            <span className={styles.profileName} title={session?.user?.email}>{`${user.first_name} ${user.last_name}`}</span>
             <span className={styles.profileRole}>Administrator</span>
           </div>
           <button type="button" className={styles.logoutBtn} onClick={handleLogout}>

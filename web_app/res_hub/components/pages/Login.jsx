@@ -1,69 +1,79 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState} from 'react';
+import { Link , useNavigate} from 'react-router-dom';
 import { useLoginMutation } from '../../api/auth_api';
 import { supabase } from '../../lib/supabase';
 
 import useLoginValidation from '../../hooks/validation/login';
 import styles from '../../styles/components/auch.module.css';
 
-// Turns an RTK Query error into a message a student can understand.
-const getErrorMessage = (error) => {
-  if (error?.status === 'FETCH_ERROR') {
-    return 'Cannot reach the server. Check your internet connection and try again.';
-  }
-  if (error?.status === 429) {
-    return error?.data?.message ?? 'Too many login attempts. Please wait a minute and try again.';
-  }
-  return error?.data?.message ?? 'Login failed. Check your email and password.';
-};
+
 
 function Login() {
   const { loginData, loginErrors, handleChange, validateForm, canSubmit } = useLoginValidation();
   const [handleLogin, { isLoading }] = useLoginMutation();
+  const navigate=useNavigate()
   const [formError, setFormError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setFormError('');
+  
+    const handleSubmit = async(e) => {
 
-    const { isValid, updatedData } = validateForm();
-    if (!isValid) return;
+      e.preventDefault();
+      const { isValid, updatedData } = validateForm();
+      if (!isValid) return;
 
-    try {
-      // The edge function validates { email, password }; older versions read
-      // { student_email, password }. Zod drops unknown keys, so sending both is safe.
-      const result = await handleLogin({
-        email: updatedData.student_email,
-        student_email: updatedData.student_email,
-        password: updatedData.password,
-      });
+      try{
+        const user_data={
+          student_email:updatedData.student_email,
+          password:updatedData.password
+        }
 
-      if (result.error) {
-        setFormError(getErrorMessage(result.error));
+        const result = await handleLogin(user_data)
+
+        const {session}=result.data.loginData
+
+        
+
+        if(result.data.success && result.data.loginData){
+            await supabase.auth.setSession({
+              access_token: session.access_token,
+              refresh_token: session.refresh_token,
+            });
+
+        
+        }
+
+        const { data: { user }, error: userError } = await supabase.auth.getUser();
+
+
+        if (userError || !user) {
+            console.log("User error:", userError);
+            return;
+        }
+        
+        console.log(result);
+        
+        const {data,error}=await supabase.from("users_profiles")
+                                         .select('*')
+                                         .eq("user_id",user.id)
+                                         .single();
+         if (error) {
+            console.log("Profile error:", error);
+            return;
+        }
+       
+        if(data.role==="admin"){
+          navigate('/admin')
+        }else{
+          navigate('/')
+        }
+
+
+      }catch(error){
+        console.log(error)
         return;
       }
-
-      const session = result.data?.loginData?.session;
-      if (!result.data?.success || !session) {
-        setFormError('Login failed. Please try again.');
-        return;
-      }
-
-      // Saving the session is what "logs the user in" on the client.
-      // AuthProvider picks it up and <GuestRoute> on /login redirects to the Homepage ("/").
-      const { error: sessionError } = await supabase.auth.setSession({
-        access_token: session.access_token,
-        refresh_token: session.refresh_token,
-      });
-
-      if (sessionError) {
-        setFormError('Could not start your session. Please try again.');
-      }
-    } catch (err) {
-      console.log(err);
-      setFormError('Something went wrong. Please try again.');
-    }
-  };
+    
+    };
 
   return (
     <div className={styles.container}>

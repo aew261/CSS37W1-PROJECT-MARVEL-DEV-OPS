@@ -62,3 +62,36 @@
     //border: 2px solid red;
     width: 60%;
 }
+
+
+.review_section {
+    //border: 2px solid blue;
+}
+
+.review_wrapper {
+    //border: 2px solid red;
+
+}
+
+.review_card {
+
+    background-color: #5b6472;
+    color: white;
+    margin-top: 0.7%;
+    padding: 0.3%;
+
+}
+
+.review_info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review_content {
+    //border: 2px solid green;
+}
+
+.review_content button {
+    width: 10%;
+    border-radius: 12px;
+}

@@ -63,8 +63,7 @@ export function AuthProvider({children}){
               }
       
               if(_event === "SIGNED_IN" && session?.user?.id  ){
-                 await loadProfile(session.user.id)
-                 .then(setUser) 
+                 await loadProfile(session.user.id).then(setUser) 
                  
               }
 

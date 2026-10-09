@@ -1,5 +1,6 @@
 .container {
     padding: 1%;
+    //position: relative;
 }
 
 .top_section {
@@ -25,6 +26,10 @@
 
 .rating_icon {
     font-size: 1.9rem;
+}
+
+.selected {
+    color: gold
 }
 
 .info_wrapper {

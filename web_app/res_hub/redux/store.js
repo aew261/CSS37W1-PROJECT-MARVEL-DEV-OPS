@@ -5,6 +5,8 @@ import { appApi } from '../api/app_api';
 import { authApi } from '../api/auth_api';
 
 
+import modalSliceReducer from '../redux/modal'
+
 const storage = {
     getItem: (key) => Promise.resolve(localStorage.getItem(key)),
     setItem: (key, value) => {
@@ -22,6 +24,7 @@ const storage = {
 const appReducer = combineReducers({
     [appApi.reducerPath]: appApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    modals:modalSliceReducer
 })
 
 const rootReducer = (state,action)=>{

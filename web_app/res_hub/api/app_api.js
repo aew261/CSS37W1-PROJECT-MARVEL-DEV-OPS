@@ -33,10 +33,26 @@ export const appApi = createApi({
             })
         }),
 
+        uploadResidence:builder.mutation({
+            query:(body)=>({
+                url:"/upload-residence",
+                method:"POST",
+                body
+            })
+        }),
+
+        fetchResInfo:builder.query({
+            query:(res_id)=>({
+                url:'/get_res_info',
+                method:"GET",
+                params:{res_id}
+            })
+        })
+
 
 
     })
 })
 
-export const {useFetchListingsQuery}=appApi;
+export const {useFetchListingsQuery, useUploadResidenceMutation, useFetchResInfoQuery}=appApi;
        

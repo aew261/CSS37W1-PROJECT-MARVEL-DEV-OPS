@@ -1,18 +1,24 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
-import { useAuth } from '../../authentication/AuthProvider';
 import styles from '../../styles/components/Header.module.css';
-
+import { supabase } from '../../lib/supabase';
 function Header() {
   const navigate = useNavigate();
   
 
+  
+
   const handleLogout = async () => {
-    await signOut();
+    const {error}=await supabase.auth.signOut()
+
+    if(error){
+      console.log(error)
+      return;
+    }
+
     navigate('/login', { replace: true });
   };
 
-  return (
+  return (<>
     <header className={styles.header}>
       <Link className={styles.logo}>
         ResHub
@@ -23,10 +29,17 @@ function Header() {
         <Link to="/" className={styles.link}>Home</Link>
         <Link to="/search" className={styles.link}>Search</Link>
         <Link to="/about" className={styles.link}>About</Link>
+        <button className={styles.logoutBtn} onClick={handleLogout} >
+          Logout
+        </button>
         
       </nav>
     </header>
-  );
+
+    <section  className={styles.spacer} >
+
+    </section>
+  </>);
 }
 
 export default Header;

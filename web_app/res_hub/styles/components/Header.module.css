@@ -4,6 +4,10 @@
   align-items: center;
   padding: 1rem 2rem;
   background: var(--color-navy);
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 4;
 }
 
 .logo {
@@ -88,6 +92,11 @@
   border-color: var(--color-gold);
 }
 
+.spacer {
+  //border: 2px solid red;
+  height: 90px;
+}
+
 /* Tablets */
 @media (max-width: 768px) {
   .header {
@@ -120,7 +129,8 @@
   }
 
   .userName {
-    display: none; /* icon only on small screens */
+    display: none;
+    /* icon only on small screens */
   }
 
   .logoutBtn span {

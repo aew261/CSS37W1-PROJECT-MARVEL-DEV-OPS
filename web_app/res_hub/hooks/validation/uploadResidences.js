@@ -24,25 +24,18 @@ function useUploadResidences() {
             }
         }
 
-        if (name === "cover_url") {
-            if (!value?.trim()) {
-                error = "Cover photo is required";
+        
+        if(name ==="res_photos"){
+            if(!value?.cover_url){
+                error="Cover Photo is requred"
             }
         }
-
-        
-
         if (name === "address") {
             if (!value?.trim()) {
                 error = "Address is required";
             }
         }
 
-        if (name === "suburb") {
-            if (!value?.trim()) {
-                error = "Suburb is required";
-            }
-        }
 
         if (name === "city") {
             if (!value?.trim()) {
@@ -84,10 +77,8 @@ function useUploadResidences() {
 
         const fields = {
             res_name: uploadData.res_name,
-            cover_url: uploadData.res_photos.cover_url,
-            additional: uploadData.res_photos.additional,
+            res_photos: uploadData.res_photos,
             address: uploadData.address,
-            suburb: uploadData.suburb,
             city: uploadData.city,
             Amneties: uploadData.Amneties
         };
@@ -104,26 +95,32 @@ function useUploadResidences() {
 
         const isValid = Object.keys(errors).length === 0;
 
-        return {
-            isValid,
-            updatedData: uploadData
-        };
+        return {isValid,updatedData: uploadData};
     };
 
+    const resetForm = () => {
+        setUploadData({
+            res_name: "",
+            address: "",
+            suburb: "",
+            city: "",
+            res_photos: null,
+            Amneties: []
+        });
+    };
     const hasErrors = Object.values(uploadErrors).some(
         (error) => error != null
     );
 
     const requiredFieldsFilled =
         uploadData.res_name.trim() &&
-        uploadData.res_photos.cover_url.trim() &&
+        uploadData.res_photos.cover_url &&
         uploadData.address.trim() &&
-        uploadData.suburb.trim() &&
         uploadData.city.trim()
 
     const canSubmit = requiredFieldsFilled && !hasErrors;
 
-    return {uploadData,uploadErrors,handleChange,validateForm,canSubmit};
+    return {uploadData,uploadErrors,handleChange,validateForm,canSubmit, resetForm};
 }
 
 export default useUploadResidences;

@@ -1,25 +1,48 @@
 import { FaStar, FaLocationDot,  } from "react-icons/fa6";
 import { IoCallSharp } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useFetchResInfoQuery } from "../../api/app_api";
+
 
 import ResImages from "../../composites/components/ResImages";
 import residenceSt from '../../styles/components/residence_info.module.css'
+import ImagesOverlay from "../modal/ImagesOverlay";
 
 function Residence_Info() {
     const navigate=useNavigate()
+
+    const [showModal,setShowModal]=useState(false)
+
+    const { state } = useLocation();
+    const res_id = state?.id;
+
+    
+
+   const {data,error,isLoading}=useFetchResInfoQuery(res_id);
+   useEffect(()=>{
+       console.log(data) 
+    })
+
+   
+    
+
+
   return (<>
     <div className={residenceSt.container}  >
+        {showModal && <ImagesOverlay setShowModal={setShowModal}   />}
         <section className={residenceSt.top_section} >
             <button onClick={()=>navigate('/residence_review')}  >
                 <p>Write a Review</p>
-                
             </button>
         </section>
  
         <main>
 
             <section  className={residenceSt.info_section}  >
-                <h2>The Goal</h2>
+                <h2>{data.data?.res_name}</h2>
+
                 <div className={residenceSt.info_wrapper}  >
 
                     <div className={residenceSt.rating_wrapper}  >
@@ -28,12 +51,12 @@ function Residence_Info() {
                         ))}
                     </div>
 
-                    <p>4.5  (15 reviews)</p>
+                    <p>{data.data?.overall_rating}  (15 reviews)</p>
                 </div>
 
                 <div className={residenceSt.info_wrapper}>
                     <FaLocationDot className={residenceSt.info_icon} />
-                    <p>123 Main Road</p>
+                    <p>{data.data?.address}</p>
                 </div>
 
                 <div className={residenceSt.info_wrapper}  >
@@ -75,7 +98,7 @@ function Residence_Info() {
 
                 <div className={residenceSt.photos_section}  >
                     <h2>Photos</h2>
-                    <ResImages/>
+                    <ResImages images={data?.data?.res_images}   />
                 </div>
 
             </section>
@@ -123,6 +146,8 @@ function Residence_Info() {
 
 
         </main>
+
+        
     </div>
   </>)
 }

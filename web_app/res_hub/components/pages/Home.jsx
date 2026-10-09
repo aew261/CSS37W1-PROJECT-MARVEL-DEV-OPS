@@ -6,8 +6,6 @@ import { IoSearchSharp } from "react-icons/io5";
 import ResidenceCard from '../common/ResidenceCard';
 import styles from '../../styles/components/home.module.css';
 
-// TODO(backend): replace with real data from app_api.js once the
-// GET /residences?featured=true endpoint exists.
 
 
 function Home() {

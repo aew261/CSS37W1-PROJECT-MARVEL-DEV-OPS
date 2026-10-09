@@ -8,7 +8,7 @@ const ProtectedRoute = () => {
     const {session,user,mounting } = useAuth()
 
     useEffect(()=>{
-        console.log("Hey",session)
+        //console.log("Hey",session)
     })
 
     if (mounting) {
@@ -19,10 +19,10 @@ const ProtectedRoute = () => {
 
 
     if(!session){
-        return <Navigate to="/signup" replace />
+        return <Navigate to="/login" replace />
     }
 
-    console.log("Session exists → allowing route");
+    
    
     return <Outlet/>
       

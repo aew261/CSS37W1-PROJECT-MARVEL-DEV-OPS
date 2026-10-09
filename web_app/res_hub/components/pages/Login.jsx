@@ -28,7 +28,7 @@ function Login() {
         }
 
         const result = await handleLogin(user_data)
-
+        
         const {session}=result.data.loginData
 
         

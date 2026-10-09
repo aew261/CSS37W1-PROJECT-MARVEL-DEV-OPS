@@ -22,8 +22,11 @@ function Residence_Info() {
 
    const {data,error,isLoading}=useFetchResInfoQuery(res_id);
    useEffect(()=>{
-       console.log(data) 
-    })
+    if(data){
+        console.log(data) 
+    }
+       
+    },[])
 
    
     
@@ -33,7 +36,7 @@ function Residence_Info() {
     <div className={residenceSt.container}  >
         {showModal && <ImagesOverlay setShowModal={setShowModal}   />}
         <section className={residenceSt.top_section} >
-            <button onClick={()=>navigate('/residence_review')}  >
+            <button onClick={()=>navigate('/residence_review', )}  >
                 <p>Write a Review</p>
             </button>
         </section>
@@ -41,7 +44,7 @@ function Residence_Info() {
         <main>
 
             <section  className={residenceSt.info_section}  >
-                <h2>{data.data?.res_name}</h2>
+                <h2>{data?.data?.res_name}</h2>
 
                 <div className={residenceSt.info_wrapper}  >
 
@@ -51,18 +54,14 @@ function Residence_Info() {
                         ))}
                     </div>
 
-                    <p>{data.data?.overall_rating}  (15 reviews)</p>
+                    <p>{data?.data?.overall_rating}  (15 reviews)</p>
                 </div>
 
                 <div className={residenceSt.info_wrapper}>
                     <FaLocationDot className={residenceSt.info_icon} />
-                    <p>{data.data?.address}</p>
+                    <p>{data?.data?.address}</p>
                 </div>
 
-                <div className={residenceSt.info_wrapper}  >
-                    <IoCallSharp className={residenceSt.info_icon} />
-                    <p>Landlord: +27 123 4567</p>
-                </div>
             </section>
 
             <section className={residenceSt.preview_section}  >
@@ -98,7 +97,7 @@ function Residence_Info() {
 
                 <div className={residenceSt.photos_section}  >
                     <h2>Photos</h2>
-                    <ResImages images={data?.data?.res_images}   />
+                    <ResImages images={data?.data?.res_images} setShowModal={setShowModal}  />
                 </div>
 
             </section>
@@ -147,7 +146,7 @@ function Residence_Info() {
 
         </main>
 
-        
+
     </div>
   </>)
 }

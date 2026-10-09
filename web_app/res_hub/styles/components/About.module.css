@@ -1,0 +1,539 @@
+.aboutPage {
+  --about-navy: #18364a;
+  --about-navy-deep: #102a3b;
+  --about-gold: #e7b04c;
+  --about-gold-light: #f7e7c5;
+  --about-ink: #263746;
+  --about-muted: #63717d;
+  --about-line: #e3e9e8;
+  --about-surface: #f5f7f5;
+  --about-white: #ffffff;
+
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(1rem, 3.5vw, 2.75rem);
+  color: var(--about-ink);
+}
+
+.aboutPage *,
+.aboutPage *::before,
+.aboutPage *::after {
+  box-sizing: border-box;
+}
+
+.aboutButton {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 0.75rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.aboutButton:focus-visible,
+.aboutTextLink:focus-visible {
+  outline: 3px solid #f5d58f;
+  outline-offset: 4px;
+}
+
+.aboutButtonPrimary {
+  background: var(--about-gold);
+  color: var(--about-navy-deep);
+}
+
+.aboutButtonLight {
+  flex: 0 0 auto;
+  background: var(--about-white);
+  color: var(--about-navy);
+}
+
+.aboutArrow {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.aboutTextLink {
+  color: #f4f6f5;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration-color: rgba(244, 246, 245, 0.45);
+  text-underline-offset: 5px;
+}
+
+.aboutHeroNote {
+  margin: 1.6rem 0 0;
+  color: #bdcbd2;
+  font-size: 0.82rem;
+}
+
+.aboutHeroVisual {
+  position: relative;
+  display: flex;
+  min-height: 345px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  background: linear-gradient(145deg, #e9f0ea 0%, #d8e8e1 100%);
+}
+
+.aboutHeroIllustration {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+}
+
+.aboutIllustrationSun {
+  position: absolute;
+  top: 13%;
+  right: 14%;
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: #f4c66c;
+}
+
+.aboutIllustrationGround {
+  position: absolute;
+  right: -5%;
+  bottom: -8%;
+  left: -5%;
+  height: 37%;
+  border-radius: 50% 50% 0 0;
+  background: #ddeae8;
+}
+
+.aboutResidence {
+  position: absolute;
+  bottom: 13%;
+}
+
+.aboutResidenceMain {
+  left: 12%;
+  width: 43%;
+  height: 55%;
+}
+
+.aboutResidenceSide {
+  right: 9%;
+  width: 25%;
+  height: 44%;
+}
+
+.aboutResidenceRoof {
+  position: absolute;
+  z-index: 1;
+  top: -20%;
+  left: -8%;
+  width: 116%;
+  height: 27%;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: #e7b04c;
+}
+
+.aboutResidenceSide .aboutResidenceRoof {
+  background: #345b67;
+}
+
+.aboutResidenceBody {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 32px);
+  grid-auto-rows: 34px;
+  align-content: center;
+  justify-content: center;
+  gap: 15px;
+  border: 2px solid #c9d8d5;
+  background: #f7f8f5;
+}
+
+.aboutResidenceSide .aboutResidenceBody {
+  grid-template-columns: repeat(2, 20px);
+  grid-auto-rows: 25px;
+  gap: 12px;
+  background: #e8eeea;
+}
+
+.aboutResidenceWindow {
+  background: #bdd4d1;
+}
+
+.aboutResidenceDoor {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 20px);
+  width: 40px;
+  height: 53px;
+  background: #18364a;
+}
+
+.aboutResidenceSide .aboutResidenceDoor {
+  left: calc(50% - 13px);
+  width: 26px;
+  height: 35px;
+  background: #e7b04c;
+}
+
+.aboutArtCard {
+  position: absolute;
+  z-index: 1;
+  right: 10px;
+  bottom: 12px;
+  width: min(245px, 72%);
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(24, 54, 74, 0.08);
+  border-radius: 14px;
+  background: var(--about-white);
+  box-shadow: 0 16px 38px rgba(16, 42, 59, 0.16);
+  color: var(--about-ink);
+}
+
+.aboutArtLabel {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: #7c6840;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.aboutArtCard strong {
+  display: block;
+  font-size: 0.96rem;
+  line-height: 1.4;
+}
+
+.aboutArtTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+}
+
+.aboutArtTags span {
+  padding: 0.28rem 0.48rem;
+  border-radius: 999px;
+  background: #f2f5f2;
+  color: #52616a;
+  font-size: 0.67rem;
+  font-weight: 700;
+}
+
+.aboutStory {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 7vw, 6rem);
+  padding: clamp(4rem, 8vw, 7rem) clamp(0.25rem, 2vw, 1.5rem);
+}
+
+.aboutSectionHeading h2,
+.aboutValuesIntro h2 {
+  margin: 0;
+  color: var(--about-navy);
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.aboutSectionHeading .aboutKicker,
+.aboutValuesIntro .aboutKicker {
+  color: #9a7027;
+}
+
+.aboutStoryCopy {
+  max-width: 680px;
+  padding-top: 0.2rem;
+}
+
+.aboutStoryCopy p {
+  margin: 0 0 1rem;
+  color: var(--about-muted);
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.aboutStoryCopy p:last-child {
+  margin-bottom: 0;
+}
+
+.aboutPurpose {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.aboutPurposeCard {
+  position: relative;
+  min-height: 255px;
+  padding: clamp(1.5rem, 3vw, 2.4rem);
+  overflow: hidden;
+  border: 1px solid var(--about-line);
+  border-radius: 18px;
+  background: var(--about-white);
+}
+
+.aboutPurposeMission {
+  background: #f5f7f5;
+}
+
+.aboutPurposeVision {
+  background: #fcf8ef;
+}
+
+.aboutPurposeNumber {
+  position: absolute;
+  top: 1.3rem;
+  right: 1.5rem;
+  color: rgba(24, 54, 74, 0.12);
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+}
+
+.aboutPurposeCard .aboutKicker {
+  color: #9a7027;
+}
+
+.aboutPurposeCard h2 {
+  position: relative;
+  max-width: 420px;
+  margin: 0 0 0.8rem;
+  color: var(--about-navy);
+  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.aboutPurposeCard > p:last-child {
+  position: relative;
+  max-width: 510px;
+  margin: 0;
+  color: var(--about-muted);
+  line-height: 1.7;
+}
+
+.aboutFeatures {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+}
+
+.aboutSectionHeadingCentered {
+  max-width: 670px;
+  margin: 0 auto 2.2rem;
+  text-align: center;
+}
+
+.aboutSectionHeadingCentered > p:last-child {
+  margin: 0.9rem 0 0;
+  color: var(--about-muted);
+  line-height: 1.7;
+}
+
+.aboutFeatureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.aboutFeatureCard {
+  min-height: 205px;
+  padding: 1.4rem;
+  border: 1px solid var(--about-line);
+  border-radius: 16px;
+  background: var(--about-white);
+}
+
+.aboutFeatureIcon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--about-gold-light);
+  color: var(--about-navy);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.aboutFeatureCard h3 {
+  margin: 1rem 0 0.45rem;
+  color: var(--about-navy);
+  font-size: 1.05rem;
+}
+
+.aboutFeatureCard p {
+  margin: 0;
+  color: var(--about-muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.aboutValues {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  padding: clamp(2rem, 5vw, 3.5rem);
+  border-radius: 22px;
+  background: var(--about-surface);
+}
+
+.aboutValuesIntro h2 {
+  max-width: 420px;
+}
+
+.aboutValueList {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.aboutValue {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 0.9rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--about-line);
+}
+
+.aboutValue:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.aboutValue > span {
+  color: #9a7027;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.aboutValue h3 {
+  margin: 0 0 0.35rem;
+  color: var(--about-navy);
+  font-size: 1rem;
+}
+
+.aboutValue p {
+  max-width: 520px;
+  margin: 0;
+  color: var(--about-muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.aboutCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: clamp(3rem, 7vw, 5.5rem);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border-radius: 20px;
+  background: var(--about-navy);
+  color: var(--about-white);
+}
+
+.aboutCta .aboutKicker {
+  color: #f5d58f;
+}
+
+.aboutCta h2 {
+  max-width: 680px;
+  margin: 0;
+  color: var(--about-white);
+  font-size: clamp(1.65rem, 3vw, 2.4rem);
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.aboutCta > div > p:last-child {
+  margin: 0.75rem 0 0;
+  color: #d9e3e8;
+  line-height: 1.65;
+}
+
+@media (max-width: 850px) {
+  .aboutHero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .aboutHeroVisual {
+    min-height: 320px;
+  }
+
+  .aboutStory,
+  .aboutValues {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutStory {
+    gap: 1.4rem;
+  }
+
+  .aboutValues {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .aboutPage {
+    padding: 1rem;
+  }
+
+  .aboutHero {
+    min-height: auto;
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .aboutHero h1 {
+    font-size: clamp(2.25rem, 12vw, 3.3rem);
+  }
+
+  .aboutHeroVisual {
+    min-height: 260px;
+  }
+
+  .aboutStory {
+    padding: 3.5rem 0.15rem;
+  }
+
+  .aboutPurpose,
+  .aboutFeatureGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .aboutPurposeCard {
+    min-height: 220px;
+  }
+
+  .aboutFeatures {
+    padding: 3.5rem 0;
+  }
+
+  .aboutFeatureCard {
+    min-height: auto;
+  }
+
+  .aboutValues {
+    padding: 1.5rem;
+  }
+
+  .aboutCta {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.4rem;
+    margin-top: 3.5rem;
+    padding: 1.5rem;
+  }
+}

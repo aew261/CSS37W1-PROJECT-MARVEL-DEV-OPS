@@ -28,7 +28,7 @@ function Header() {
 
         <Link to="/" className={styles.link}>Home</Link>
         <Link to="/search" className={styles.link}>Search</Link>
-        <Link to="/about" className={styles.link}>About</Link>
+        <Link to="/About" className={styles.link}>About</Link>
         <button className={styles.logoutBtn} onClick={handleLogout} >
           Logout
         </button>

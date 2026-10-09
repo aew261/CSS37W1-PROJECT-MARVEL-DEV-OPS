@@ -9,6 +9,7 @@ import Login from '../components/pages/Login'
 import Signup from '../components/pages/Signup'
 import AdminDashboard from '../components/admin/AdminDashboard'
 import AdminLayout from '../components/admin/AdminLayout'
+import About from '../components/pages/About'
 import Search from '../components/pages/Search'
 import UploadResidence from "../components/admin/UploadResidence"
 import ResidenceReview from "../components/pages/ResidenceReview"
@@ -41,6 +42,7 @@ function App() {
           <Route path="/search" element={<Search />} /> 
           <Route path="/residence_info" element={<Residence_Info />} />
           <Route path="/residence_review" element={<ResidenceReview />} />
+          <Route path="/About" element={<About />} />
         </Route>
       </Route>
 

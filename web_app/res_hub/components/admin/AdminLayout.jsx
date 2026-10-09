@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { FaChartLine, FaCloudUploadAlt, FaArrowLeft, FaSignOutAlt } from 'react-icons/fa';
+import { FaUserAlt } from "react-icons/fa";
 
 import { useAuth } from '../../authentication/AuthProvider';
 import { supabase } from '../../lib/supabase';
@@ -10,6 +11,7 @@ import styles from '../../styles/components/admin_layout.module.css';
 const NAV_ITEMS = [
   { to: '/admin', label: 'Home / Analytics', icon: FaChartLine, end: true },
   { to: '/admin/upload', label: 'Upload Residence', icon: FaCloudUploadAlt, end: false },
+  { to: '/admin/add_admin', label: 'Add Admin', icon: FaUserAlt , end: false }
 ];
 
 function AdminLayout() {

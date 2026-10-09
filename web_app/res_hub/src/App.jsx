@@ -17,6 +17,7 @@ import Residence_Info from "../components/pages/Residence_Info"
 
 import RootRedirect from "../authentication/RootRedirect"
 import ProtectedRoute from "../authentication/ProtectedRoute"
+import AddAdmin from "../components/admin/AddAdmin"
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="upload" element={<UploadResidence />} /> 
+            <Route path="add_admin" element={<AddAdmin />} />
            </Route>
 
         

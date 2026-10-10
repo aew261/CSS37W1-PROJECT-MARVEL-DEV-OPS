@@ -47,6 +47,14 @@ export const appApi = createApi({
                 method:"GET",
                 params:{res_id}
             })
+        }),
+
+        sendReviews:builder.mutation({
+            query:(body)=>({
+                url:'/send-reviews',
+                method:"POST",
+                body
+            })
         })
 
 
@@ -54,5 +62,5 @@ export const appApi = createApi({
     })
 })
 
-export const {useFetchListingsQuery, useUploadResidenceMutation, useFetchResInfoQuery}=appApi;
+export const {useFetchListingsQuery, useUploadResidenceMutation, useFetchResInfoQuery, useSendReviewsMutation}=appApi;
        

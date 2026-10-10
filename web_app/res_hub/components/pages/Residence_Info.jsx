@@ -1,7 +1,7 @@
 import { FaStar, FaLocationDot,  } from "react-icons/fa6";
 import { IoCallSharp } from "react-icons/io5";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useFetchResInfoQuery } from "../../api/app_api";
 
@@ -28,6 +28,10 @@ function Residence_Info() {
        
     },[])
 
+    useEffect(()=>{
+        console.log("info: ", res_id)
+    })
+
    
     
 
@@ -36,7 +40,7 @@ function Residence_Info() {
     <div className={residenceSt.container}  >
         {showModal && <ImagesOverlay setShowModal={setShowModal}   />}
         <section className={residenceSt.top_section} >
-            <button onClick={()=>navigate('/residence_review', )}  >
+            <button onClick={()=>navigate('/residence_review',{ state: { res_id }} )}  >
                 <p>Write a Review</p>
             </button>
         </section>

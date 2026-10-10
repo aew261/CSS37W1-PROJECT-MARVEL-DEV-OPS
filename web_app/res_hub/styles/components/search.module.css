@@ -1,3 +1,4 @@
+/* Container with your requested responsive padding rules */
 .container {
   width: 100%;
   box-sizing: border-box;
@@ -48,6 +49,7 @@
   box-shadow: 0 2px 8px rgba(26, 34, 56, 0.04);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   position: relative;
+
 }
 
 .searchBar:focus-within {
@@ -130,6 +132,7 @@
   gap: 1.5rem;
 }
 
+
 .suggestion_section {
   //border: 2px solid red;
   position: absolute;
@@ -156,10 +159,4 @@
 
 .suggestion_card p {
   font-size: 1rem;
-}
-
-@media (max-width: 640px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
 }

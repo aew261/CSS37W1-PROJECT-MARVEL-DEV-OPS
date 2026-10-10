@@ -9,6 +9,7 @@ import Login from '../components/pages/Login'
 import Signup from '../components/pages/Signup'
 import AdminDashboard from '../components/admin/AdminDashboard'
 import AdminLayout from '../components/admin/AdminLayout'
+import About from '../components/pages/About'
 import Search from '../components/pages/Search'
 import UploadResidence from "../components/admin/UploadResidence"
 import ResidenceReview from "../components/pages/ResidenceReview"
@@ -16,6 +17,7 @@ import Residence_Info from "../components/pages/Residence_Info"
 
 import RootRedirect from "../authentication/RootRedirect"
 import ProtectedRoute from "../authentication/ProtectedRoute"
+import AddAdmin from "../components/admin/AddAdmin"
 
 
 
@@ -33,6 +35,7 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboard />} />
             <Route path="upload" element={<UploadResidence />} /> 
+            <Route path="add_admin" element={<AddAdmin />} />
            </Route>
 
         
@@ -41,6 +44,7 @@ function App() {
           <Route path="/search" element={<Search />} /> 
           <Route path="/residence_info" element={<Residence_Info />} />
           <Route path="/residence_review" element={<ResidenceReview />} />
+          <Route path="/About" element={<About />} />
         </Route>
       </Route>
 

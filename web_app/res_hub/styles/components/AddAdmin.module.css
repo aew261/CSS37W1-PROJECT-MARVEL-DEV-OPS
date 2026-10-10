@@ -1,0 +1,179 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  margin: 0 0 0.4rem;
+  color: var(--color-navy);
+  font-size: 2rem;
+}
+
+.header p,
+.sectionHeader p {
+  margin: 0;
+  color: #5b6472;
+  font-size: 0.95rem;
+}
+
+.section {
+  max-width: 720px;
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeader {
+  margin-bottom: 1.4rem;
+}
+
+.sectionHeader h2 {
+  margin: 0 0 0.3rem;
+  color: var(--color-navy);
+  font-size: 1.2rem;
+}
+
+.sectionHeader p {
+  font-size: 0.85rem;
+}
+
+.form {
+  display: grid;
+  gap: 1.15rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field label {
+  color: var(--color-navy);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  border: 1px solid #cbd2dc;
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  color: var(--color-navy);
+  font: inherit;
+  padding: 0.65rem 0.75rem;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 3px solid color-mix(in srgb, var(--color-gold) 35%, transparent);
+  border-color: var(--color-gold);
+}
+
+.helpText {
+  color: #5b6472;
+  font-size: 0.8rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.3rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 42px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.6rem 1.1rem;
+}
+
+.primaryButton {
+  background: var(--color-gold);
+  color: var(--color-navy);
+}
+
+.primaryButton:hover:not(:disabled) {
+  background: #d49a2e;
+}
+
+.primaryButton:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.secondaryButton {
+  border: 1px solid #cbd2dc;
+  background: var(--color-white);
+  color: var(--color-navy);
+}
+
+.secondaryButton:hover {
+  background: var(--color-slate);
+}
+
+.successMessage,
+.errorMessage {
+  margin: 0;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  padding: 0.75rem 0.9rem;
+}
+
+.successMessage {
+  background: var(--color-amber-bg);
+  color: var(--color-amber-text);
+}
+
+.errorMessage {
+  background: #fff0ef;
+  color: #9f2d24;
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .actions button {
+    width: 100%;
+  }
+}

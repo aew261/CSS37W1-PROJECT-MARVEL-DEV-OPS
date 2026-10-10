@@ -29,7 +29,8 @@
 }
 
 .selected {
-    color: gold
+    color: gold;
+    font-size: 1.9rem;
 }
 
 .info_wrapper {

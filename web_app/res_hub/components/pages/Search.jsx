@@ -1,56 +1,41 @@
-import { useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useMemo, useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
+import { useFetchListingsQuery, useSuggestResQuery } from '../../api/app_api';
+ 
 import ResidenceCard from '../common/ResidenceCard';
 import styles from '../../styles/components/search.module.css';
 
-// TODO(backend): replace with GET /residences?query=&status= from app_api.js
-const ALL_RESIDENCES = [
- {
-    id: 1,
-    title: 'Bolitha Residence',
-    address: '4.5 · 10 Kingfisher str, Southernwood, Mthatha',
-    rating: 4.5,
-    status: 'Verified',
-    image: 'https://placehold.co/400x300?text=Bolitha',
-  },
-  {
-    id: 2,
-    title: 'Amaxesibe 4 Residence',
-    address: '4.5 · 198 1st avenue, ncambedlana, Mthatha',
-    rating: 4.5,
-    status: 'Verified',
-    image: 'https://placehold.co/400x300?text=Amaxesibe',
-  },
-  {
-    id: 3,
-    title: 'Nkosinathi Residence',
-    address: '4.5 · 68 4th Avenue, Norwood, Mthatha',
-    rating: 4.5,
-    status: 'Under Review',
-    image: 'https://placehold.co/400x300?text=Nkosinathi',
-  },
-];
 
-const FILTERS = ['All', 'Verified', 'Under Review'];
 
 function Search() {
-  const [searchParams] = useSearchParams();
-  const [query, setQuery] = useState(searchParams.get('q') ?? '');
-  const [activeFilter, setActiveFilter] = useState('All');
+   
+   const [query, setQuery] = useState('');
+   const [suggestions,setSuggestions]=useState([])
+   const [showSuggestion, setShowSuggestion]=useState(false)
 
-  const results = useMemo(() => {
-    return ALL_RESIDENCES.filter((residence) => {
-      const matchesQuery = residence.title
-        .toLowerCase()
-        .includes(query.trim().toLowerCase());
-      const matchesFilter =
-        activeFilter === 'All' || residence.status === activeFilter;
-      return matchesQuery && matchesFilter;
-    });
-  }, [query, activeFilter]);
+  const navigate=useNavigate()
 
-  return (
+   
+
+   const {data:suggestData, error:suggestError}=useSuggestResQuery(query.trim(),{skip: query.trim().length < 1,})
+   
+   useEffect(()=>{
+      if(suggestData){
+        setSuggestions(suggestData.data)
+        console.log(suggestData)
+      }
+
+      if(suggestError){
+        console.log(suggestError)
+      }
+   },[suggestError,suggestData])
+
+   
+
+  
+
+  return ( 
     <div className={styles.container}>
       <h1>Search Residences</h1>
 
@@ -61,32 +46,28 @@ function Search() {
           placeholder="Search by residence name..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onFocus={()=>setShowSuggestion(true)}
+          onBlur={()=>{setShowSuggestion(false), setSuggestions([])}}
         />
+
+        {suggestions.length > 0 && showSuggestion &&
+          (<div className={styles.suggestion_section}  >
+              {suggestions.map((item,ind)=>(
+                  <div  
+                        className={styles.suggestion_card} 
+                        onMouseDown={() => navigate('/residence_info', {state: { id: item.id },})}
+                        key={ind}
+                  >
+                    <BsSearch className={styles.search_icon}  />
+                    <p>{item.name}</p>
+                  </div>
+              ))}
+          </div>)
+        }
+
       </div>
 
-      <div className={styles.filters}>
-        {FILTERS.map((filter) => (
-          <button
-            key={filter}
-            className={`${styles.filterChip} ${
-              activeFilter === filter ? styles.filterChipActive : ''
-            }`}
-            onClick={() => setActiveFilter(filter)}
-          >
-            {filter}
-          </button>
-        ))}
-      </div>
-
-      {results.length === 0 ? (
-        <p className={styles.empty}>No residences match your search.</p>
-      ) : (
-        <div className={styles.grid}>
-          {results.map((residence) => (
-            <ResidenceCard key={residence.id} residence={residence} />
-          ))}
-        </div>
-      )}
+      
     </div>
   );
 }

@@ -133,6 +133,8 @@ serve(async(req)=>{
 })
 
 
+
+
 // FETCH RESIDENCE INFOMATION
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
 import { createClient } from 'npm:@supabase/supabase-js';
@@ -172,22 +174,36 @@ serve(async(req)=>{
         const {data:{user}, error}= await supabase.auth.getUser();
         if (error || !user) return new Response('Unauthorized', { status: 401 });
 
-        const {res_id}= await req.json()
+        const {student_email}= await req.json()
 
-        const {data,error:res_error}= await supabase.rpc('get_residence_info',{p_res_id:res_id})
-
-        if(res_error){
+        const {data,error:profileError}=await supabase.from("users_profiles")
+                                         .select('student_email')
+                                         .eq('student_email', student_email)
+                                         .maybeSingle()
+        if(profileError){
             return new Response(JSON.stringify({
-                error:res_error,
-                message:"Unable to Fetch check your internet connection"
+                success:false,
+                error:profileError,
+                message:"Student Email Not Found"
             }),{status:400, headers:corsHeaders})
         }
 
-        return new Response(JSON.stringify({
-            success:true,
-            data:data
-        }),{status:200, headers:corsHeaders})
+        const {error:updateError}=await supabase.from("users_profiles")
+                                                .update({role:"admin"})
+                                                .eq("student_email", student_email)
+        if(updateError){
+            return new Response(JSON.stringify({
+                success:false,
+                error:updateError,
+                message:"Could not add Admin try again later"
+            }),{status:400, headers:corsHeaders})
+        }
 
+        return new Responses(JSON.stringify({
+            success:true,
+            message:"Successfuly added admin"
+        }),{status:200, headers:corsHeaders})
+        
 
     }catch(error){
         return new Response(JSON.stringify({

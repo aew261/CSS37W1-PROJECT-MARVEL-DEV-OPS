@@ -55,6 +55,30 @@ export const appApi = createApi({
                 method:"POST",
                 body
             })
+        }),
+
+        fetchReviews:builder.query({
+            query:(res_id)=>({
+                url:'/fetch-reviews',
+                method:'GET',
+                params:{res_id}
+            })
+        }),
+
+        addAdmin:builder.mutation({
+            query:(body)=>({
+                url:'/add-admin',
+                method:'POST',
+                body
+            })
+        }),
+
+        suggestRes:builder.query({
+            query:(term)=>({
+                url:'/suggest-res',
+                method:'GET',
+                params:{term}
+            })
         })
 
 
@@ -62,5 +86,8 @@ export const appApi = createApi({
     })
 })
 
-export const {useFetchListingsQuery, useUploadResidenceMutation, useFetchResInfoQuery, useSendReviewsMutation}=appApi;
+export const {useFetchListingsQuery, useUploadResidenceMutation, useFetchResInfoQuery, useSendReviewsMutation,
+              useFetchReviewsQuery,useAddAdminMutation, useSuggestResQuery
+              
+             }=appApi;
        

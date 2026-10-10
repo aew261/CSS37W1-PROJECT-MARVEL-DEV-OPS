@@ -18,7 +18,6 @@ function AdminLayout() {
   const navigate = useNavigate();
   const {user}=useAuth();
   
-
   const handleLogout = async () => {
     const {error}=await supabase.auth.signOut()
 
@@ -33,7 +32,7 @@ function AdminLayout() {
   return (
     <div className={styles.shell}>
 
-      {/* ============ TOP HEADER ============ */}
+      
       <header className={styles.topbar}>
 
         {/* Left: app name / logo */}
@@ -54,7 +53,9 @@ function AdminLayout() {
           </span>
 
           <div className={styles.profileText}>
-            <span className={styles.profileName} >{`${user?.first_name} ${user?.last_name}`}</span>
+            <span className={styles.profileName} >
+              {`${user?.first_name} ${user?.last_name}`}
+            </span>
             <span className={styles.profileRole}>Administrator</span>
           </div>
 
@@ -69,7 +70,7 @@ function AdminLayout() {
 
       <div className={styles.body}>
 
-        {/* ============ SIDEBAR ============ */}
+        
         <aside className={styles.sidebar}>
           <p className={styles.sidebarLabel}>Menu</p>
           

@@ -36,9 +36,7 @@ export const SAMPLE_RESIDENCES = [
 // Platform-wide average per review category (1-5 stars).
 export const SAMPLE_CATEGORY_RATINGS = [
   { label: 'Infrastructure', score: 4.2 },
-  { label: 'Maintenance', score: 3.6 },
+  { label: 'Service', score: 3.6 },
   { label: 'Landlord Behaviour', score: 4.0 },
-  { label: 'Safety', score: 4.4 },
-  { label: 'Cleanliness', score: 3.9 },
-  { label: 'Accessibility', score: 4.1 },
+  
 ];

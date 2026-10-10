@@ -4,7 +4,7 @@ import { BsImages } from "react-icons/bs";
 import image from '../../src/assets/images/Bolitha.jpeg'
 function ResImages({images, setShowModal}) {
   return (<>
-    <div className={imageSt.container} onClick={()=>setShowModal} >
+    <div className={imageSt.container} onClick={()=>setShowModal(true)} >
         {images?.additional_photos.length > 0 && (
           <div className={imageSt.image_count_wrapper}  >
               <p> +{images?.additional_photos.length}</p>

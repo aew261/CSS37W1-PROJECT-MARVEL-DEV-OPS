@@ -5,14 +5,35 @@ import { setModalState } from "../../redux/modal";
 import image from '../../src/assets/images/Bolitha.jpeg'
 
 import imagesSt from '../../styles/modal/images_overlay.module.css'
+import { useEffect, useState } from "react";
 
-function ImagesOverlay({setShowModal}) {
+function ImagesOverlay({setShowModal, images}) {
+    const [preview, setPreview]=useState([])
+    const [index,setIndex]=useState(0)
+    useEffect(() => {
+        if (images) {
+            setPreview([
+                images.cover_url,
+                ...(images.additional_photos || [])
+            ]);
+        }
+        console.log(preview)
+    }, [images]);
+
     
+
+   const handleNext=()=>{
+        setIndex((prev)=>(prev + 1)%preview?.length)
+   }
+
+   const handlePrev=()=>{
+        setIndex((prev)=> (prev - 1 + preview.length) % preview.length)
+   }
   return (<>
     <div className={imagesSt.container}  >
 
         <section className={imagesSt.navigators}  >
-            <button   >
+            <button onClick={handlePrev}  >
                 <FaArrowLeft  className={imagesSt.icon}  />
             </button>
         </section>
@@ -25,16 +46,19 @@ function ImagesOverlay({setShowModal}) {
             </button>
 
             <div className={imagesSt.images_wrapper}  >
-                <img src={image}  />
+                <img src={`${preview[index]}`}  />
             </div>
 
             <div className={imagesSt.indicators_section}  >
                 
                 
-                {Array(5).fill(null).map((_, index) => (
+                {Array(preview?.length).fill(null).map((_, ind) => (
                     <div
-                        key={index}
-                        className={imagesSt.indicator}
+                        key={ind}
+                        className={`${imagesSt.indicator} ${
+                            ind === index ? imagesSt.active : ""
+                        }`}
+                        
                     >
                     </div>
                 ))}
@@ -46,7 +70,7 @@ function ImagesOverlay({setShowModal}) {
 
 
         <section className={imagesSt.navigators}  >
-            <button>
+            <button   onClick={handleNext}>
                 <FaArrowRight className={imagesSt.icon}   />
             </button>
         </section>

@@ -1,9 +1,9 @@
 import { FaStar, FaLocationDot,  } from "react-icons/fa6";
 import { IoCallSharp } from "react-icons/io5";
 import { useNavigate, useLocation } from "react-router-dom";
-import { use, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { useFetchResInfoQuery } from "../../api/app_api";
+import { useEffect, useState } from "react";
+import { useTimeAgo } from "../../hooks/useTimeAgo";
+import { useFetchResInfoQuery, useFetchReviewsQuery } from "../../api/app_api";
 
 
 import ResImages from "../../composites/components/ResImages";
@@ -21,15 +21,21 @@ function Residence_Info() {
     
 
    const {data,error,isLoading}=useFetchResInfoQuery(res_id);
+   const {data:reviewData,error:reviewError, isLoading:reviewLoading}=useFetchReviewsQuery(res_id)
+
    useEffect(()=>{
     if(data){
         console.log(data) 
     }
+
+    if(error){
+        console.log(error)
+    }
        
-    },[])
+    },[data,error])
 
     useEffect(()=>{
-        console.log("info: ", res_id)
+        //console.log("info: ", res_id)
     })
 
    
@@ -38,7 +44,7 @@ function Residence_Info() {
 
   return (<>
     <div className={residenceSt.container}  >
-        {showModal && <ImagesOverlay setShowModal={setShowModal}   />}
+        {showModal && <ImagesOverlay setShowModal={setShowModal}  images={data?.data?.res_images}  />}
         <section className={residenceSt.top_section} >
             <button onClick={()=>navigate('/residence_review',{ state: { res_id }} )}  >
                 <p>Write a Review</p>
@@ -54,11 +60,15 @@ function Residence_Info() {
 
                     <div className={residenceSt.rating_wrapper}  >
                         {[...Array(5)].map((_,ind)=>(
-                            <FaStar key={ind} className={residenceSt.rating_icon} />
+                            <FaStar 
+                                key={ind} 
+                                 className={ ind < data?.data?.overall_rating || 0 ?
+                                            residenceSt.selected : residenceSt.rating_icon }
+                                />
                         ))}
                     </div>
 
-                    <p>{data?.data?.overall_rating}  (15 reviews)</p>
+                    <p>{data?.data?.overall_rating}  {`(${data?.data?.total_ratings} reviews)`}</p>
                 </div>
 
                 <div className={residenceSt.info_wrapper}>
@@ -77,21 +87,33 @@ function Residence_Info() {
                         <div  className={residenceSt.category}  >
                             <p>Landlord</p>
                             {[...Array(5)].map((_,ind)=>(
-                                <FaStar key={ind} className={residenceSt.rating_icon} />
+                                <FaStar key={ind} 
+                                className={ ind < data?.data?.landlord_rating || 0 ?
+                                            residenceSt.selected : residenceSt.rating_icon }
+                                
+                               />
                             ))}
                         </div>
 
                         <div  className={residenceSt.category}  >
                             <p>Infrastructure</p>
                             {[...Array(5)].map((_,ind)=>(
-                                <FaStar key={ind} className={residenceSt.rating_icon} />
+                                <FaStar 
+                                    key={ind} 
+                                     className={ ind < data?.data?.infrastructure_rating || 0 ?
+                                            residenceSt.selected : residenceSt.rating_icon }
+                                />
                             ))}
                         </div>
 
                         <div  className={residenceSt.category}  >
                             <p>Service</p>
                             {[...Array(5)].map((_,ind)=>(
-                                <FaStar key={ind} className={residenceSt.rating_icon} />
+                                <FaStar 
+                                    key={ind}
+                                     className={ ind < data?.data?.service_rating || 0 ?
+                                            residenceSt.selected : residenceSt.rating_icon }
+                            />
                             ))}
                         </div>
 
@@ -112,37 +134,25 @@ function Residence_Info() {
 
                 <div className={residenceSt.review_wrapper}  >
 
-                    <div className={residenceSt.review_card}   >
-                        <div className={residenceSt.review_info}  >
-                            <p>Thabo M</p>
-                            <p>2021/02/07</p>
+                    {reviewData?.data.map((item,ind)=>(
+                        <div className={residenceSt.review_card}   >
+                            <div className={residenceSt.review_info}  >
+                                <p>{item?.first_name} {`${item?.last_name}`} </p>
+                                <p>
+                                   {useTimeAgo(item.created_at).type === "relative"
+                                    ? `${useTimeAgo(item.created_at).value} ago`
+                                    : `${useTimeAgo(item.created_at).date} at ${
+                                        useTimeAgo(item.created_at).time
+                                    }`} 
+                                </p>
+                            </div>
+                            <div className={residenceSt.review_content}   >
+                            <p>{item?.comment} </p> 
+
+                            </div>
                         </div>
-                        <div className={residenceSt.review_content}   >
-                           <p>Hey i stayed here last year. </p> 
-
-                           <button   >
-                                <p>Helpful (3)</p>
-                           </button>
-
-                        </div>
-                    </div>
-
-                    <div className={residenceSt.review_card}   >
-                        <div className={residenceSt.review_info}  >
-                            <p>Thabo M</p>
-                            <p>2021/02/07</p>
-                        </div>
-                        <div className={residenceSt.review_content}   >
-                           <p>Hey i stayed here last year. </p> 
-
-                           <button   >
-                                <p>Helpful (3)</p>
-                           </button>
-
-                        </div>
-                    </div>
-
-
+                    ))}
+                    
                 </div>
 
             </section>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/components/residence_card.module.css';
 
 function ResidenceCard({ residence }) {
-  const { image_url, name, rating, status,id } = residence;
+  const { image_url, name, rating, status,id,overall_ratings, address } = residence;
 
   const statusClass =status === 'Verified' ? 'status-verified' : 'status-review';
   const navigate = useNavigate()
@@ -22,14 +22,14 @@ function ResidenceCard({ residence }) {
 
         <div className={styles.rating}>
           <FaStar className={styles.star} />
-          <span>{rating.toFixed(1)}</span>
+          <span>{overall_ratings?.overall?.toFixed(1)}</span>
         </div>
 
         <h3 className={styles.title}>{name}</h3>
 
         <p className={styles.address}>
           <FaMapMarkerAlt className={styles.pin} />
-          {/*address*/}
+          {address}
         </p>
 
         <span className={`status-badge ${statusClass}`}>

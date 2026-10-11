@@ -39,7 +39,6 @@ function Login() {
               access_token: session.access_token,
               refresh_token: session.refresh_token,
             });
-
         }
 
         const { data: { user }, error: userError } = await supabase.auth.getUser();

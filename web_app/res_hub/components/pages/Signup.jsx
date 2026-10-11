@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import {useSignupMutation} from '../../api/auth_api'
+import { supabase } from '../../lib/supabase';
 import Toast from '../common/Toast';
 import useSignupValidation from '../../hooks/validation/signup';
 import styles from '../../styles/components/auch.module.css';
@@ -25,10 +26,43 @@ function Signup() {
         password:updatedData.password
       }
 
-     const result = await handleSignup(user_data)
-      if(result.data.success){
-        navigate('/Login')
+      const result = await handleSignup(user_data)
+      const session= result.data.data.session
+
+      //console.log("sess: ",session)
+
+      console.log("res: ", result)
+      if(result.data.success && session){
+              await supabase.auth.setSession({
+                   access_token: session.access_token,
+                   refresh_token: session.refresh_token,
+              });
+       }
+     
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+     
+     
+      if (userError || !user) {
+            console.log("User error:", userError);
+            return;
       }
+
+
+      const {data,error}=await supabase.from("users_profiles")
+                                         .select('*')
+                                         .eq("user_id",user.id)
+                                         .single();
+      if (error) {
+            console.log("Profile error:", error);
+            return;
+      }
+
+      if(data.role==="admin"){
+          navigate('/admin')
+      }else{
+          navigate('/')
+      }
+      
      
 
     }catch(error){
@@ -53,8 +87,15 @@ function Signup() {
   };
 
   useEffect(()=>{
-    //console.log(signupData)
-  },[signupData])
+    if(error){
+      console.log(error)
+    }
+
+    if(data){
+        console.log("sign:",data)
+    }
+   
+  },[data, error])
 
   return (
     <div className={styles.container}>

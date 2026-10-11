@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTimeAgo } from "../../hooks/useTimeAgo";
 import { useFetchResInfoQuery, useFetchReviewsQuery } from "../../api/app_api";
-
+import { useAuth } from "../../authentication/AuthProvider";
 
 import ResImages from "../../composites/components/ResImages";
 import residenceSt from '../../styles/components/residence_info.module.css'
@@ -14,11 +14,10 @@ function Residence_Info() {
     const navigate=useNavigate()
 
     const [showModal,setShowModal]=useState(false)
-
+    const {user}=useAuth()
     const { state } = useLocation();
     const res_id = state?.id;
 
-    
 
    const {data,error,isLoading}=useFetchResInfoQuery(res_id);
    const {data:reviewData,error:reviewError, isLoading:reviewLoading}=useFetchReviewsQuery(res_id)
@@ -35,8 +34,16 @@ function Residence_Info() {
     },[data,error])
 
     useEffect(()=>{
-        //console.log("info: ", res_id)
-    })
+
+        if(reviewData){
+            console.log(reviewData)
+        }
+
+        if(reviewError){
+            console.log(reviewError)
+        }
+        
+    },[reviewData])
 
    
     
@@ -135,34 +142,37 @@ function Residence_Info() {
                 <div className={residenceSt.review_wrapper}  >
 
                  {reviewData?.data.map((item, ind) => (
-    <div className={residenceSt.review_card} key={item.id ?? ind}>
-        <div className={residenceSt.review_info}>
-            <p>
-                {item?.first_name} {item?.last_name}
-            </p>
+                    <div className={residenceSt.review_card} key={item.id ?? ind}>
+                        <div className={residenceSt.review_info}>
+                            <p>
+                                {item?.first_name} {item?.last_name}
+                            </p>
 
-            <p>
-                {useTimeAgo(item.created_at).type === "relative"
-                    ? `${useTimeAgo(item.created_at).value} ago`
-                    : `${useTimeAgo(item.created_at).date} at ${
-                          useTimeAgo(item.created_at).time
-                      }`}
-            </p>
-        </div>
+                            <p>
+                                {useTimeAgo(item.created_at).type === "relative"
+                                    ? `${useTimeAgo(item.created_at).value} ago`
+                                    : `${useTimeAgo(item.created_at).date} at ${
+                                        useTimeAgo(item.created_at).time
+                                    }`}
+                            </p>
+                        </div>
 
-        <div className={residenceSt.review_content}>
-            <p>{item?.comment}</p>
-        </div>
+                        <div className={residenceSt.review_content}>
+                            <p>{item?.comment}</p>
+                        </div>
 
-        <div className={residenceSt.review_actions}>
-            <button
-                type="button"
-                className={residenceSt.delete_button}
-            >
-                Delete
-            </button>
-        </div>
-    </div>))}
+                        {(user.user_id === item.user_id) &&
+                            (<div className={residenceSt.review_actions}>
+                                <button
+                                    type="button"
+                                    className={residenceSt.delete_button}
+                                >
+                                    Delete
+                                </button>
+                            </div>)
+                        }
+                    </div>))
+                 }
                     
                 </div>
 

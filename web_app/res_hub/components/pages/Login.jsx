@@ -111,6 +111,11 @@ function Login() {
             <span className={styles.error}>{loginErrors.student_email}</span>
           )}
         </label>
+        
+    <p className={styles.switchAuth} style={{ textAlign: 'right', marginTop: '-0.5rem' }}>
+    <Link to="/forgot-password">Forgot Password?</Link>
+    </p>
+
 
         <label className={styles.field}>
           <span>Password *</span>

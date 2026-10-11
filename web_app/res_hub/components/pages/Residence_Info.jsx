@@ -134,24 +134,35 @@ function Residence_Info() {
 
                 <div className={residenceSt.review_wrapper}  >
 
-                    {reviewData?.data.map((item,ind)=>(
-                        <div className={residenceSt.review_card}   >
-                            <div className={residenceSt.review_info}  >
-                                <p>{item?.first_name} {`${item?.last_name}`} </p>
-                                <p>
-                                   {useTimeAgo(item.created_at).type === "relative"
-                                    ? `${useTimeAgo(item.created_at).value} ago`
-                                    : `${useTimeAgo(item.created_at).date} at ${
-                                        useTimeAgo(item.created_at).time
-                                    }`} 
-                                </p>
-                            </div>
-                            <div className={residenceSt.review_content}   >
-                            <p>{item?.comment} </p> 
+                 {reviewData?.data.map((item, ind) => (
+    <div className={residenceSt.review_card} key={item.id ?? ind}>
+        <div className={residenceSt.review_info}>
+            <p>
+                {item?.first_name} {item?.last_name}
+            </p>
 
-                            </div>
-                        </div>
-                    ))}
+            <p>
+                {useTimeAgo(item.created_at).type === "relative"
+                    ? `${useTimeAgo(item.created_at).value} ago`
+                    : `${useTimeAgo(item.created_at).date} at ${
+                          useTimeAgo(item.created_at).time
+                      }`}
+            </p>
+        </div>
+
+        <div className={residenceSt.review_content}>
+            <p>{item?.comment}</p>
+        </div>
+
+        <div className={residenceSt.review_actions}>
+            <button
+                type="button"
+                className={residenceSt.delete_button}
+            >
+                Delete
+            </button>
+        </div>
+    </div>))}
                     
                 </div>
 

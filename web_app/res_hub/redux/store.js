@@ -4,6 +4,11 @@ import {persistReducer, persistStore} from 'redux-persist';
 import { appApi } from '../api/app_api';
 import { authApi } from '../api/auth_api';
 
+
+import modalSliceReducer from '../redux/modal'
+import inactivityReducer from '../redux/inactivity'
+
+
 const storage = {
     getItem: (key) => Promise.resolve(localStorage.getItem(key)),
     setItem: (key, value) => {
@@ -16,9 +21,13 @@ const storage = {
     }
 };
 
+
+
 const appReducer = combineReducers({
     [appApi.reducerPath]: appApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    modals:modalSliceReducer,
+    inactivity:inactivityReducer
 })
 
 const rootReducer = (state,action)=>{

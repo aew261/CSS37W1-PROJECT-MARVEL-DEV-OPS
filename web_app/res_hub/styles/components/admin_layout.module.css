@@ -1,0 +1,339 @@
+/* ===== Admin shell: top header + left sidebar + content ===== */
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-slate);
+}
+
+/* ---------- Top header ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(220px, 520px) minmax(150px, 1fr);
+  grid-template-areas: "brand search profile";
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 1.5rem;
+  background: var(--color-navy);
+  color: #fff;
+}
+
+.brand {
+  grid-area: brand;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  justify-self: start;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+}
+
+.brandMark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--color-gold);
+  color: var(--color-navy);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+}
+
+.searchSlot {
+  grid-area: search;
+}
+
+.profile {
+  grid-area: profile;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.profileText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.profileName {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.profileRole {
+  font-size: 0.72rem;
+  color: var(--color-gold);
+}
+
+.logoutBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.logoutBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-gold);
+}
+
+/* ---------- Global search ---------- */
+.search {
+  position: relative;
+}
+
+.search form {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #7a8394;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.55rem 1rem 0.55rem 2.4rem;
+  font-size: 0.9rem;
+  background: #fff;
+  color: var(--color-navy);
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: var(--color-gold);
+}
+
+.searchResults {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  margin: 0;
+  padding: 0.35rem;
+  list-style: none;
+  background: #fff;
+  color: var(--color-navy);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(26, 34, 56, 0.2);
+}
+
+.searchResult {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.7rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+.searchResult:hover,
+.searchResult:focus-visible {
+  background: var(--color-slate);
+  outline: none;
+}
+
+.searchResultName {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.searchResultMeta {
+  font-size: 0.75rem;
+  color: #5b6472;
+}
+
+.searchEmpty {
+  padding: 0.7rem;
+  font-size: 0.85rem;
+  color: #5b6472;
+}
+
+/* ---------- Body: sidebar + content ---------- */
+.body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 250px;
+  flex-shrink: 0;
+  padding: 1.25rem 0.9rem;
+  background: #fff;
+  border-right: 1px solid #e3e7ee;
+}
+
+.sidebarLabel {
+  margin: 0 0 0.4rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #7a8394;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid transparent;
+  color: var(--color-navy);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  background: var(--color-slate);
+}
+
+.navLinkActive {
+  background: var(--color-slate);
+  border-left-color: var(--color-gold);
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: auto;
+  padding: 0.7rem 0.8rem;
+  border-top: 1px solid #e3e7ee;
+  color: #5b6472;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: var(--color-navy);
+}
+
+.content {
+  flex: 1;
+  min-width: 0; /* lets wide tables scroll inside instead of stretching the page */
+}
+
+/* ---------- Tablets ---------- */
+@media (max-width: 900px) {
+  .topbar {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand profile"
+      "search search";
+    padding: 0.7rem 1rem;
+    gap: 0.6rem 1rem;
+  }
+
+  .body {
+    flex-direction: column;
+  }
+
+  /* Sidebar becomes a horizontal tab strip */
+  .sidebar {
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-right: none;
+    border-bottom: 1px solid #e3e7ee;
+    overflow-x: auto;
+  }
+
+  .sidebarLabel {
+    display: none;
+  }
+
+  .sidebarNav {
+    flex-direction: row;
+  }
+
+  .navLink {
+    white-space: nowrap;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+
+  .navLinkActive {
+    border-bottom-color: var(--color-gold);
+  }
+
+  .backLink {
+    margin: 0 0 0 auto;
+    border-top: none;
+    white-space: nowrap;
+  }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 600px) {
+  .profileText,
+  .logoutBtn span {
+    display: none;
+  }
+
+  .logoutBtn {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .backLink span {
+    display: none;
+  }
+}

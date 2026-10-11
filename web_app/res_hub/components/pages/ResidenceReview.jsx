@@ -1,9 +1,10 @@
 import { FaStar, FaLocationDot,  } from "react-icons/fa6";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useSendReviewsMutation } from "../../api/app_api";
 import {useAuth} from '../../authentication/AuthProvider'
 import resReviewSt from '../../styles/components/residence_review.module.css'
+import Toast from "../common/Toast";
 import ImagesOverlay from "../modal/ImagesOverlay";
 
 function ResidenceReview() {
@@ -11,6 +12,8 @@ function ResidenceReview() {
     const {user, session}=useAuth()
 
     const [handleReviews,{data,error,isLoading}]=useSendReviewsMutation()
+    const submissionLock = useRef(false); 
+    const [toast,setToast]=useState(null);
     const { state } = useLocation();
     const res_id = state?.res_id;
 
@@ -27,34 +30,88 @@ function ResidenceReview() {
         }));
     };
 
-    const handleSubmit=async()=>{
-        if(review === null ){
-            console.log("no review")  
-            return; 
-        } 
-        try{
-            const reviewData={
-                res_id:res_id,
-                review,
-                ratings
-            }
+    const handleSubmit = async () => {
+// Stop repeated clicks before another request can start.
+if (submissionLock.current || isLoading) {
+return;
+}
 
-            const results= await handleReviews(reviewData).unwrap()
-            console.log(results);
-        }catch(error){
-            console.log(error)
-        }
-    }
+// Check that the review has actual text.
+if (!review || !review.trim()) {
+setToast({
+title: "Error",
+content: "Please write your review before submitting.",
+type: "error",
+});
+return;
+}
 
+// Ensure that a residence was selected.
+if (!res_id) {
+setToast({
+title: "Error",
+content: "Residence information is missing. Please select a residence again.",
+type: "error",
+});
+return;
+}
 
+submissionLock.current = true;
+setToast(null);
 
+try {
+const reviewData = {
+res_id: res_id,
+review: review.trim(),
+ratings: ratings,
+};
+
+await handleReviews(reviewData).unwrap();
+
+setToast({
+title: "Success",
+content: "Your review has been submitted successfully!",
+type: "success",
+});
+
+// Clear the form after successful submission.
+setReview("");
+
+setRatings({
+landlord: 0,
+service: 0,
+infrastructure: 0,
+});
+
+} catch (err) {
+console.error("Review submission failed:", err);
+
+setToast({
+title: "Error",
+content:
+err?.data?.message ||
+err?.data?.error?.message ||
+"Your review could not be submitted. Please try again.",
+type: "error",
+});
+
+} finally {
+submissionLock.current = false;
+}
+};
 
     useEffect(()=>{
         console.log("review",res_id)
     })
   return (<>
     <div className={resReviewSt.container}  >
-        
+        {toast && (
+            <Toast
+                title={toast.title}
+                content={toast.content}
+                type={toast.type}
+/>
+)}
         <h1 style={{textAlign:"center"}}  >
             Write a residence review 
         </h1>
@@ -129,9 +186,12 @@ function ResidenceReview() {
                     placeholder="Tell us about your experience"
                     
             />
-            <button onClick={handleSubmit}  >
-                Submit Review
-            </button>
+        <button
+            onClick={handleSubmit}
+            disabled={isLoading}
+>
+            {isLoading ? "Submitting Review..." : "Submit Review"}
+        </button>
         </section>
     </div>
   </>)

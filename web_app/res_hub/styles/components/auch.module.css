@@ -1,12 +1,12 @@
 .container {
   min-height: calc(100vh - 70px - 160px);
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
   background: var(--color-slate);
-
+  position: relative;
 }
 
 .card {

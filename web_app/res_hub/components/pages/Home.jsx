@@ -4,6 +4,7 @@ import { useFetchListingsQuery } from '../../api/app_api';
 import { IoSearchSharp } from "react-icons/io5";
 
 import ResidenceCard from '../common/ResidenceCard';
+import Toast from '../common/Toast';
 import styles from '../../styles/components/home.module.css';
 
 
@@ -20,7 +21,8 @@ function Home() {
 
   return (
     <div className={styles.container}>
-
+      {<Toast/>}
+      
       <section className={styles.top_section}  >
         <div   className={styles.top_section_text}>
               <h1>Find your Ideal Residence</h1>

@@ -1,23 +1,25 @@
-import { useState} from 'react';
+import { useState, useEffect} from 'react';
 import { Link , useNavigate} from 'react-router-dom';
 import { useLoginMutation } from '../../api/auth_api';
 import { supabase } from '../../lib/supabase';
 
 import useLoginValidation from '../../hooks/validation/login';
 import styles from '../../styles/components/auch.module.css';
+import Toast from '../common/Toast';
 
 
 
 function Login() {
   const { loginData, loginErrors, handleChange, validateForm, canSubmit } = useLoginValidation();
-  const [handleLogin, { isLoading }] = useLoginMutation();
+  const [handleLogin, { error,isLoading }] = useLoginMutation();
   const navigate=useNavigate()
-  const [formError, setFormError] = useState('');
-
+  const [formError, setFormError] = useState(null);
+  const [formSuccess, setFormSuccess] = useState(null);
   
     const handleSubmit = async(e) => {
 
       e.preventDefault();
+      setFormError(null);
       const { isValid, updatedData } = validateForm();
       if (!isValid) return;
 
@@ -31,15 +33,13 @@ function Login() {
         
         const {session}=result.data.loginData
 
-        
-
+    
         if(result.data.success && result.data.loginData){
             await supabase.auth.setSession({
               access_token: session.access_token,
               refresh_token: session.refresh_token,
             });
 
-        
         }
 
         const { data: { user }, error: userError } = await supabase.auth.getUser();
@@ -50,7 +50,6 @@ function Login() {
             return;
         }
         
-        console.log(result);
         
         const {data,error}=await supabase.from("users_profiles")
                                          .select('*')
@@ -60,13 +59,14 @@ function Login() {
             console.log("Profile error:", error);
             return;
         }
+
+        setFormSuccess(result.data.message);
        
         if(data.role==="admin"){
           navigate('/admin')
         }else{
           navigate('/')
         }
-
 
       }catch(error){
         console.log(error)
@@ -75,16 +75,28 @@ function Login() {
     
     };
 
+    // THIS HOW WE GET THE ERROR
+    useEffect(()=>{
+      if(error){
+        
+        setFormError(error.data.error.message)
+      }
+    },[error])
+
   return (
     <div className={styles.container}>
+
+      {(formError || formSuccess) && 
+        ( <Toast title={formError ? "Error" : "Success"} 
+                 content={formError || formSuccess} 
+                 type={formError ? "error" : "success"} 
+          />)}
 
       <form className={styles.card} onSubmit={handleSubmit} noValidate>
         <h1>Log In</h1>
         <p className={styles.subtitle}>Welcome back to ResHub</p>
 
-        {formError && (
-          <div className={styles.formError} role="alert">{formError}</div>
-        )}
+       
 
         <label className={styles.field}>
           <span>Email *</span>

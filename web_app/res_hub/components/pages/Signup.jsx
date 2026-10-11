@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import {useSignupMutation} from '../../api/auth_api'
-
+import Toast from '../common/Toast';
 import useSignupValidation from '../../hooks/validation/signup';
 import styles from '../../styles/components/auch.module.css';
 
@@ -15,6 +15,7 @@ function Signup() {
     e.preventDefault();
     const { isValid, updatedData } = validateForm();
     if (!isValid) return;
+
     try{
 
       const user_data={
@@ -29,8 +30,6 @@ function Signup() {
         navigate('/Login')
       }
      
-
-
 
     }catch(error){
       console.log("Error: ", error)

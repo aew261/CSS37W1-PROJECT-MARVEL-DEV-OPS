@@ -60,6 +60,8 @@ function Login() {
             return;
         }
 
+        console.log("dd:",data)
+
         setFormSuccess(result.data.message);
        
         if(data.role==="admin"){
@@ -78,8 +80,8 @@ function Login() {
     // THIS HOW WE GET THE ERROR
     useEffect(()=>{
       if(error){
-        
-        setFormError(error.data.error.message)
+        console.log(error)
+        setFormError(error?.data?.error?.message || error?.data?.message)
       }
     },[error])
 

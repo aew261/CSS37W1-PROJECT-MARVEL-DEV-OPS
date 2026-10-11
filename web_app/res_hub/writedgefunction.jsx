@@ -213,3 +213,51 @@ serve(async(req)=>{
 })
 
 
+
+
+import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
+import { createClient } from 'npm:@supabase/supabase-js';
+
+const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+};
+
+serve(async (req) => {
+    // Handle CORS preflight requests
+    if (req.method === 'OPTIONS') {
+        return new Response('ok', { headers: corsHeaders });
+    }
+
+    if (req.method !== 'GET') {
+        return new Response(JSON.stringify({
+            message: "Method not allowed"
+        }), { status: 405, headers: corsHeaders });
+    }
+
+    try {
+        const authHeader = req.headers.get('Authorization');
+        const supabase = createClient(
+            Deno.env.get('SUPABASE_URL')!,
+            Deno.env.get('SUPABASE_ANON_KEY')!, 
+            { global: { headers: { Authorization: authHeader || '' } } }
+        );
+
+        const { data: { user }, error } = await supabase.auth.getUser();
+        if (error || !user) return new Response('Unauthorized', { status: 401, headers: corsHeaders });
+
+        const {data,error}=await supabase.from("residence_listings")
+                                         .select('*')
+
+        const {data,error}=await supabase.from("overall_ratings")
+                                         .select('overall')
+                                         .eq("res_id",data.id)
+
+
+    } catch (error) {
+        return new Response(JSON.stringify({
+            error: error.message
+        }), { status: 500, headers: corsHeaders });
+    }
+});

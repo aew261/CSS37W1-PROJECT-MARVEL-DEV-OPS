@@ -1,6 +1,8 @@
 import { FaImage, FaTimes } from 'react-icons/fa';
 import { useEffect, useState,useRef } from 'react';
 import { useUploadResidenceMutation } from '../../api/app_api';
+import Toast from '../common/Toast';
+
 import useUploadResidences from '../../hooks/validation/uploadResidences';
 import styles from '../../styles/components/upload_residence.module.css';
 
@@ -10,6 +12,8 @@ function UploadResidence() {
 
     const {handleChange,uploadData,uploadErrors,validateForm, canSubmit, resetForm}=useUploadResidences()
     const [amneties, setAmneties]=useState([])
+    const [formError,setFormError]=useState(null)
+    
     
     const [images,setImages]=useState({
         cover_url:null,
@@ -140,6 +144,10 @@ function UploadResidence() {
 
         fileInputRef.current.value = "";
     };
+
+    useEffect(()=>{
+
+    },[error])
 
     
     return (

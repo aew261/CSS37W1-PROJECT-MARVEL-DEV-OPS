@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import {useAuth} from "../authentication/AuthProvider"
 import {Outlet,Navigate} from "react-router-dom"
-
+import { useInactivityTimeout } from "../hooks/useInactivityTimeout"
 
 import Layout from '../components/layout/Layout'
 
@@ -23,7 +23,7 @@ import AddAdmin from "../components/admin/AddAdmin"
 
 function App() {
 
-
+  useInactivityTimeout()
   return (
     <Routes>
       <Route path="/login" element={<Login />} />

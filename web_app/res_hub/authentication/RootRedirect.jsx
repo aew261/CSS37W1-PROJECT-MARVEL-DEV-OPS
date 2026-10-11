@@ -12,8 +12,11 @@ const RootRedirect = () => {
 
   // If user is an admin returning to '/', send them to '/admin'
   if (user?.role === "admin") {
+    
     return <Navigate to="/admin" replace />;
   }
+
+  //console.log("User role:", user?.role);
 
   // Regular user lands on Home
   return <Home />;

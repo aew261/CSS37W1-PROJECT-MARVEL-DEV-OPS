@@ -79,7 +79,23 @@ export const appApi = createApi({
                 method:'GET',
                 params:{term}
             })
+        }),
+
+        fetchSystemStata:builder.query({
+            query:()=>({
+                url:'/get-system-stats',
+                method:'GET'
+            })
+        }),
+
+        fetchResidencesAdmin:builder.query({
+            query:()=>({
+                url:'/get-res-admin',
+                method:'GET'
+            })
         })
+
+
 
 
 
@@ -87,7 +103,8 @@ export const appApi = createApi({
 })
 
 export const {useFetchListingsQuery, useUploadResidenceMutation, useFetchResInfoQuery, useSendReviewsMutation,
-              useFetchReviewsQuery,useAddAdminMutation, useSuggestResQuery
+              useFetchReviewsQuery,useAddAdminMutation, useSuggestResQuery, useFetchSystemStataQuery,
+              useFetchResidencesAdminQuery
               
              }=appApi;
        

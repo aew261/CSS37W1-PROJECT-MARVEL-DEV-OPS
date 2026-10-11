@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import {useFetchSystemStataQuery, useFetchResidencesAdminQuery} from '../../api/app_api';
 import { SAMPLE_RESIDENCES, SAMPLE_CATEGORY_RATINGS } from './adminData';
 import styles from '../../styles/components/admin_dashboard.module.css';
 
@@ -9,16 +11,35 @@ function AdminDashboard() {
   const residences = SAMPLE_RESIDENCES;
 
   const totalReviews = residences.reduce((sum, r) => sum + r.reviews, 0);
-  const openIssues = residences.reduce((sum, r) => sum + r.openIssues, 0);
   const verified = residences.filter((r) => r.status === 'Verified').length;
-  const underReview = residences.length - verified;
-  const averageRating = totalReviews? 
-    residences.reduce((sum, r) => sum + r.rating * r.reviews, 0) / totalReviews : 0;
+  
+
+  const {data:systemStats, isLoading, error, isError} = useFetchSystemStataQuery();
+  const {data:residence, isLoading:resLoading, error:resError}=useFetchResidencesAdminQuery()
+
+  useEffect(()=>{
+
+    if(systemStats){
+      console.log("System stats fetched:", systemStats);
+    }
+
+    if(error){
+      console.log(error)
+    }
+
+    if(residence){
+      console.log("RES: ",residence)
+    }
+
+    if(resError){
+      console.log("RES ERROR:", resError)
+    }
+  })
 
   const stats = [
-    { title: 'Total Residences', value: residences.length },
-    { title: 'Total Reviews', value: totalReviews },
-    { title: 'Average Rating', value: averageRating.toFixed(1) },
+    { title: 'Total Residences', value: systemStats?.data?.residenceCount },
+    { title: 'Total Reviews', value: systemStats?.data?.reviewCount },
+    { title: 'Total Users', value: systemStats?.data?.userCount },
   ];
 
 
@@ -44,45 +65,21 @@ function AdminDashboard() {
 
       {/* ---- Overview statistics ---- */}
       <section className={styles.statsGrid} aria-label="Overview statistics">
+
         {stats.map((stat) => (
           <div key={stat.title} className={styles.statCard}>
             <span className={styles.statTitle}>{stat.title}</span>
             <strong className={styles.statNumber}>{stat.value}</strong>
           </div>
         ))}
+
       </section>
 
-      {/* ---- Category ratings across all residences ---- */}
-      <section className={styles.section}>
-
-        <div className={styles.sectionHeader}>
-
-          <div>
-            <h2>Average Category Ratings</h2>
-            <p>How students rate residences on average, out of 5.</p>
-          </div>
-          
-        </div>
-
-        <ul className={styles.barList}>
-          {SAMPLE_CATEGORY_RATINGS.map(({ label, score }) => (
-            <li key={label} className={styles.barRow}>
-              <span className={styles.barLabel}>{label}</span>
-              <div
-                className={styles.barTrack}
-                role="img"
-                aria-label={`${label}: ${score} out of 5`}
-              >
-                <div className={styles.barFill} style={{ width: `${(score / 5) * 100}%` }} />
-              </div>
-              <span className={styles.barValue}>{score.toFixed(1)}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      
 
       {/* ---- Residence overview table ---- */}
       <section className={styles.section}>
+
         <div className={styles.sectionHeader}>
           <div>
             <h2>Residence Overview</h2>
@@ -103,7 +100,7 @@ function AdminDashboard() {
             </thead>
 
             <tbody>
-              {residences.map((r) => (
+              {residence?.data?.map((r) => (
                 <tr key={r.id}>
 
                   <td>
@@ -113,7 +110,7 @@ function AdminDashboard() {
 
                   <td>
                     <span className={styles.ratingCell}>
-                      <FaStar className={styles.star} aria-hidden="true" /> {r.rating.toFixed(1)}
+                      <FaStar className={styles.star} aria-hidden="true" /> {(r.overall_ratings?.overall.toFixed(1)) || 0}
                     </span>
                   </td>
 

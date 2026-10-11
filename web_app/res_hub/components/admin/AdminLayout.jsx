@@ -43,7 +43,7 @@ function AdminLayout() {
 
         {/* Center: global search */}
         <div className={styles.searchSlot}>
-          <AdminSearch />
+          {/*<AdminSearch />*/}
         </div>
 
         {/* Right: profile info + logout */}

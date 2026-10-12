@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import { useTimeAgo } from "../../hooks/useTimeAgo";
 import { useFetchResInfoQuery, useFetchReviewsQuery } from "../../api/app_api";
 import { useAuth } from "../../authentication/AuthProvider";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setReviews, deleteReview } from "../../redux/reviews";
+import {supabase} from '../../lib/supabase'
 import ResImages from "../../composites/components/ResImages";
 import residenceSt from '../../styles/components/residence_info.module.css'
 import ImagesOverlay from "../modal/ImagesOverlay";
@@ -18,10 +20,13 @@ function Residence_Info() {
     const { state } = useLocation();
     const res_id = state?.id;
 
+    const dispatch=useDispatch()
+
 
    const {data,error,isLoading}=useFetchResInfoQuery(res_id);
    const {data:reviewData,error:reviewError, isLoading:reviewLoading}=useFetchReviewsQuery(res_id)
 
+   const reviews=useSelector((state)=>state.review.reviews)
    useEffect(()=>{
     if(data){
         console.log(data) 
@@ -36,15 +41,54 @@ function Residence_Info() {
     useEffect(()=>{
 
         if(reviewData){
-            console.log(reviewData)
+            dispatch(setReviews(reviewData?.data || []))
+            //console.log(reviews)
         }
 
         if(reviewError){
             console.log(reviewError)
         }
         
-    },[reviewData])
+    },[reviewData, dispatch,reviews])
 
+    useEffect(() => {
+        if (reviewData) {
+            dispatch(setReviews(reviewData?.data || []));
+        }
+
+        if (reviewError) {
+            console.log(reviewError);
+        }
+    }, [reviewData, reviewError, dispatch]);
+
+    useEffect(()=>{
+        console.log("review",reviews)
+    })
+
+    
+
+    const handleDelete = async (id) => {
+        dispatch(deleteReview(id));
+    try {
+        const { data, error } = await supabase
+            .from("reviews")
+            .delete()
+            .eq("id", id)
+            .select();
+         
+        if (error) {
+            console.error("Failed to delete review:", error.message);
+            return;
+        }
+
+        console.log("Deleted review:", data);
+
+        
+       
+    } catch (error) {
+        console.error("Unexpected error:", error);
+    }
+};
    
     
 
@@ -141,7 +185,7 @@ function Residence_Info() {
 
                 <div className={residenceSt.review_wrapper}  >
 
-                 {reviewData?.data.map((item, ind) => (
+                 {reviews?.map((item, ind) => (
                     <div className={residenceSt.review_card} key={item.id ?? ind}>
                         <div className={residenceSt.review_info}>
                             <p>
@@ -166,6 +210,7 @@ function Residence_Info() {
                                 <button
                                     type="button"
                                     className={residenceSt.delete_button}
+                                    onClick={()=>handleDelete(item.id)}
                                 >
                                     Delete
                                 </button>

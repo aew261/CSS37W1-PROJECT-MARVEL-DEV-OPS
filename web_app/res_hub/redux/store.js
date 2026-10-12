@@ -7,7 +7,7 @@ import { authApi } from '../api/auth_api';
 
 import modalSliceReducer from '../redux/modal'
 import inactivityReducer from '../redux/inactivity'
-
+import reviewReducer from '../redux/reviews'
 
 const storage = {
     getItem: (key) => Promise.resolve(localStorage.getItem(key)),
@@ -27,7 +27,8 @@ const appReducer = combineReducers({
     [appApi.reducerPath]: appApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     modals:modalSliceReducer,
-    inactivity:inactivityReducer
+    inactivity:inactivityReducer,
+    review:reviewReducer
 })
 
 const rootReducer = (state,action)=>{

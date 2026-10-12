@@ -1,10 +1,10 @@
 .container {
     padding: 1%;
-    //position: relative;
+    
 }
 
 .top_section {
-    //border: 2px solid blue;
+    
     display: flex;
     justify-content: flex-end;
 
@@ -20,7 +20,7 @@
 }
 
 .info_section {
-    //border: 2px solid green;
+    
     line-height: 0;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .info_wrapper {
-    //border: 2px solid blue;
+    
     display: flex;
     align-items: center;
     gap: 1%;
@@ -47,35 +47,35 @@
 }
 
 .preview_section {
-    //border: 2px solid green;
+    
     display: flex;
 }
 
 .category_section {
-    //border: 2px solid blue;
+    
     width: 40%;
 }
 
 .category_wrapper {
-    //border: 2px solid red;
+    
 }
 
 .category {
-    //border: 2px solid green;
+    
 }
 
 .photos_section {
-    //border: 2px solid red;
+    
     width: 60%;
 }
 
 
 .review_section {
-    //border: 2px solid blue;
+    
 }
 
 .review_wrapper {
-    //border: 2px solid red;
+    
 
 }
 
@@ -94,10 +94,45 @@
 }
 
 .review_content {
-    //border: 2px solid green;
+    
 }
 
 .review_content button {
     width: 10%;
     border-radius: 12px;
+}
+/* Review action buttons */
+.review_actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 10px;
+    padding-bottom: 5px;
+}
+
+.delete_button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.delete_button:hover {
+    background-color: #b02a37;
+    transform: translateY(-1px);
+}
+
+.delete_button:active {
+    transform: translateY(0);
+}
+
+.delete_button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
 }

@@ -52,7 +52,7 @@ function AdminDashboard() {
 
         <div>
           <h1>Home / Analytics</h1>
-          <p>Overview of residences, student reviews and maintenance reports.</p>
+          <p>Overview of residences and student reviews.</p>
         </div>
 
         <Link to="/admin/upload" className={styles.primaryLink}>
@@ -83,7 +83,7 @@ function AdminDashboard() {
         <div className={styles.sectionHeader}>
           <div>
             <h2>Residence Overview</h2>
-            <p>Ratings, review counts and open issues for every listed residence.</p>
+            <p>Ratings and review counts for every listed residence.</p>
           </div>
         </div>
 

@@ -4,8 +4,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTimeAgo } from "../../hooks/useTimeAgo";
 import { useFetchResInfoQuery, useFetchReviewsQuery } from "../../api/app_api";
-
-
+import { useAuth } from "../../authentication/AuthProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { setReviews, deleteReview } from "../../redux/reviews";
+import {supabase} from '../../lib/supabase'
 import ResImages from "../../composites/components/ResImages";
 import residenceSt from '../../styles/components/residence_info.module.css'
 import ImagesOverlay from "../modal/ImagesOverlay";
@@ -14,15 +16,17 @@ function Residence_Info() {
     const navigate=useNavigate()
 
     const [showModal,setShowModal]=useState(false)
-
+    const {user}=useAuth()
     const { state } = useLocation();
     const res_id = state?.id;
 
-    
+    const dispatch=useDispatch()
+
 
    const {data,error,isLoading}=useFetchResInfoQuery(res_id);
    const {data:reviewData,error:reviewError, isLoading:reviewLoading}=useFetchReviewsQuery(res_id)
 
+   const reviews=useSelector((state)=>state.review.reviews)
    useEffect(()=>{
     if(data){
         console.log(data) 
@@ -35,9 +39,56 @@ function Residence_Info() {
     },[data,error])
 
     useEffect(()=>{
-        //console.log("info: ", res_id)
+
+        if(reviewData){
+            dispatch(setReviews(reviewData?.data || []))
+            //console.log(reviews)
+        }
+
+        if(reviewError){
+            console.log(reviewError)
+        }
+        
+    },[reviewData, dispatch,reviews])
+
+    useEffect(() => {
+        if (reviewData) {
+            dispatch(setReviews(reviewData?.data || []));
+        }
+
+        if (reviewError) {
+            console.log(reviewError);
+        }
+    }, [reviewData, reviewError, dispatch]);
+
+    useEffect(()=>{
+        console.log("review",reviews)
     })
 
+    
+
+    const handleDelete = async (id) => {
+        dispatch(deleteReview(id));
+    try {
+        const { data, error } = await supabase
+            .from("reviews")
+            .delete()
+            .eq("id", id)
+            .select();
+         
+        if (error) {
+            console.error("Failed to delete review:", error.message);
+            return;
+        }
+
+        console.log("Deleted review:", data);
+
+        
+       
+    } catch (error) {
+        console.error("Unexpected error:", error);
+    }
+};
    
     
 
@@ -134,24 +185,39 @@ function Residence_Info() {
 
                 <div className={residenceSt.review_wrapper}  >
 
-                    {reviewData?.data.map((item,ind)=>(
-                        <div className={residenceSt.review_card}   >
-                            <div className={residenceSt.review_info}  >
-                                <p>{item?.first_name} {`${item?.last_name}`} </p>
-                                <p>
-                                   {useTimeAgo(item.created_at).type === "relative"
+                 {reviews?.map((item, ind) => (
+                    <div className={residenceSt.review_card} key={item.id ?? ind}>
+                        <div className={residenceSt.review_info}>
+                            <p>
+                                {item?.first_name} {item?.last_name}
+                            </p>
+
+                            <p>
+                                {useTimeAgo(item.created_at).type === "relative"
                                     ? `${useTimeAgo(item.created_at).value} ago`
                                     : `${useTimeAgo(item.created_at).date} at ${
                                         useTimeAgo(item.created_at).time
-                                    }`} 
-                                </p>
-                            </div>
-                            <div className={residenceSt.review_content}   >
-                            <p>{item?.comment} </p> 
-
-                            </div>
+                                    }`}
+                            </p>
                         </div>
-                    ))}
+
+                        <div className={residenceSt.review_content}>
+                            <p>{item?.comment}</p>
+                        </div>
+
+                        {(user.user_id === item.user_id) &&
+                            (<div className={residenceSt.review_actions}>
+                                <button
+                                    type="button"
+                                    className={residenceSt.delete_button}
+                                    onClick={()=>handleDelete(item.id)}
+                                >
+                                    Delete
+                                </button>
+                            </div>)
+                        }
+                    </div>))
+                 }
                     
                 </div>
 

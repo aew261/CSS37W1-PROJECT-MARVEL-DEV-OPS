@@ -88,10 +88,9 @@ function Residence_Info() {
     } catch (error) {
         console.error("Unexpected error:", error);
     }
-};
+   };
    
     
-
 
   return (<>
     <div className={residenceSt.container}  >

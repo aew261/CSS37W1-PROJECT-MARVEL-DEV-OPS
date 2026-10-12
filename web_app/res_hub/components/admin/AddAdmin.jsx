@@ -1,28 +1,75 @@
+
 import { useState } from 'react';
 import { useAddAdminMutation } from '../../api/app_api';
+import Toast from '../common/Toast';
 import styles from '../../styles/components/AddAdmin.module.css';
 
 export default function AddAdmin() {
   const [email, setEmail] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState('');
+  const [toast, setToast] = useState(null);
 
-  const [handleAdmin,{data}]=useAddAdminMutation()
+  const [handleAdmin, { isLoading }] = useAddAdminMutation();
 
-  const handleSubmit=async()=>{
-    if(!email || email === '' || !email?.trim()) return;
-    try{
-        const results= await handleAdmin({student_email:email})
-        console.log(results)
-    }catch(error){
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    setToast(null);
+
+    const studentEmail = email.trim();
+
+    if (!studentEmail) {
+      setToast({
+        title: 'Email required',
+        content: 'Enter the student email of the administrator.',
+        type: 'error',
+      });
+      return;
     }
-  }
 
-  
+    try {
+      const result = await handleAdmin({
+        student_email: studentEmail,
+      }).unwrap();
+
+      if (result?.success === false) {
+        throw new Error(
+          result?.message || 'Unable to add this administrator.'
+        );
+      }
+
+      setEmail('');
+
+      setToast({
+        title: 'Admin added',
+        content:
+          result?.message ||
+          'The administrator request completed successfully.',
+        type: 'success',
+      });
+    } catch (err) {
+      console.error('Add admin failed:', err);
+
+      setToast({
+        title: 'Unable to add admin',
+        content:
+          err?.data?.error?.message ||
+          err?.data?.message ||
+          err?.message ||
+          'The administrator could not be added. Please try again.',
+        type: 'error',
+      });
+    }
+  };
 
   return (
     <main className={styles.container}>
+      {toast && (
+        <Toast
+          title={toast.title}
+          content={toast.content}
+          type={toast.type}
+        />
+      )}
 
       <header className={styles.header}>
         <div>
@@ -36,8 +83,7 @@ export default function AddAdmin() {
           <h2>Admin details</h2>
         </div>
 
-        <div className={styles.form}   >
-
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.field}>
             <label htmlFor="admin-email">Student Email</label>
 
@@ -50,38 +96,41 @@ export default function AddAdmin() {
               required
               type="email"
               value={email}
+              disabled={isLoading}
             />
           </div>
 
-          {error && (
-            <p className={styles.errorMessage} role="alert">
-              {error}
-            </p>
-          )}
-
           <div className={styles.actions}>
-            
             <button
-                className={styles.secondaryButton}
-                type="button"
-              >
-                Cancel
+              className={styles.secondaryButton}
+              type="button"
+              disabled={isLoading}
+              onClick={() => {
+                setEmail('');
+                setToast(null);
+              }}
+            >
+              Clear
             </button>
-            
+
             <button
               className={styles.primaryButton}
-              onClick={handleSubmit}
-              disabled={submitting}
               type="submit"
+              disabled={isLoading}
+              aria-busy={isLoading}
             >
-              {submitting ? 'Adding...' : 'Add Admin'}
+              {isLoading ? (
+                <>
+                  <span className={styles.loadingSpinner} />
+                  Adding admin...
+                </>
+              ) : (
+                'Add Admin'
+              )}
             </button>
-
           </div>
-
-        </div>
+        </form>
       </section>
     </main>
   );
 }
-

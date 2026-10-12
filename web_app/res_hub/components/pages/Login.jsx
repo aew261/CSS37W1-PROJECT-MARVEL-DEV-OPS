@@ -112,9 +112,7 @@ function Login() {
           )}
         </label>
         
-    <p className={styles.switchAuth} style={{ textAlign: 'right', marginTop: '-0.5rem' }}>
-    <Link to="/forgot-password">Forgot Password?</Link>
-    </p>
+    
 
 
         <label className={styles.field}>
@@ -133,6 +131,11 @@ function Login() {
         <button type="submit" className={styles.submitBtn} disabled={!canSubmit || isLoading}>
           {isLoading ? 'Logging in...' : 'Log In'}
         </button>
+
+        <p  className={styles.switchAuth} 
+            style={{ textAlign: 'right', marginTop: '1rem' }}>
+          <Link to="/forgot-password">Forgot Password?</Link>
+        </p>
 
         <p className={styles.switchAuth}>
           Don&apos;t have an account? <Link to="/signup">Sign up</Link>

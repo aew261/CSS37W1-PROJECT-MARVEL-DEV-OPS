@@ -31,86 +31,75 @@ function ResidenceReview() {
     };
 
     const handleSubmit = async () => {
-// Stop repeated clicks before another request can start.
-if (submissionLock.current || isLoading) {
-return;
-}
+        // Stop repeated clicks before another request can start.
+        if (submissionLock.current || isLoading) {
+        return;
+        }
 
-// Check that the review has actual text.
-if (!review || !review.trim()) {
-setToast({
-title: "Error",
-content: "Please write your review before submitting.",
-type: "error",
-});
-return;
-}
+        // Check that the review has actual text.
+        if (!review || !review.trim()) {
+        setToast({ title: "Error", content: "Please write your review before submitting.", type: "error", });
+        return;
+        }
 
-// Ensure that a residence was selected.
-if (!res_id) {
-setToast({
-title: "Error",
-content: "Residence information is missing. Please select a residence again.",
-type: "error",
-});
-return;
-}
+        // Ensure that a residence was selected.
+        if (!res_id) {
+        setToast({
+        title: "Error",
+        content: "Residence information is missing. Please select a residence again.",
+        type: "error",
+        });
+        return;
+        }
 
-submissionLock.current = true;
-setToast(null);
+        submissionLock.current = true;
+        setToast(null);
 
-try {
-const reviewData = {
-res_id: res_id,
-review: review.trim(),
-ratings: ratings,
-};
+        try {
+        const reviewData = {
+        res_id: res_id,
+        review: review.trim(),
+        ratings: ratings,
+        };
 
-await handleReviews(reviewData).unwrap();
+        await handleReviews(reviewData).unwrap();
 
-setToast({
-title: "Success",
-content: "Your review has been submitted successfully!",
-type: "success",
-});
+        setToast({
+        title: "Success",
+        content: "Your review has been submitted successfully!",
+        type: "success",
+        });
 
-// Clear the form after successful submission.
-setReview("");
+        // Clear the form after successful submission.
+        setReview("");
 
-setRatings({
-landlord: 0,
-service: 0,
-infrastructure: 0,
-});
+        setRatings({
+        landlord: 0,
+        service: 0,
+        infrastructure: 0,
+        });
 
-} catch (err) {
-console.error("Review submission failed:", err);
+        } catch (err) {
+        console.error("Review submission failed:", err);
 
-setToast({
-title: "Error",
-content:
-err?.data?.message ||
-err?.data?.error?.message ||
-"Your review could not be submitted. Please try again.",
-type: "error",
-});
+        setToast({title: "Error",content:
+        err?.data?.message ||
+        err?.data?.error?.message ||
+        "Your review could not be submitted. Please try again.",
+        type: "error",
+        });
 
-} finally {
-submissionLock.current = false;
-}
-};
+        } finally {
+        submissionLock.current = false;
+        }
+    };
 
     useEffect(()=>{
         console.log("review",res_id)
     })
   return (<>
     <div className={resReviewSt.container}  >
-        {toast && (
-            <Toast
-                title={toast.title}
-                content={toast.content}
-                type={toast.type}
-/>
+        {toast && ( <Toast title={toast.title} content={toast.content} type={toast.type}/>
 )}
         <h1 style={{textAlign:"center"}}  >
             Write a residence review 
@@ -186,13 +175,15 @@ submissionLock.current = false;
                     placeholder="Tell us about your experience"
                     
             />
-        <button
-            onClick={handleSubmit}
-            disabled={isLoading}
->
-            {isLoading ? "Submitting Review..." : "Submit Review"}
-        </button>
+            <button
+                onClick={handleSubmit}
+                disabled={isLoading}
+            >
+                {isLoading ? "Submitting Review..." : "Submit Review"}
+            </button>
+
         </section>
+
     </div>
   </>)
 }

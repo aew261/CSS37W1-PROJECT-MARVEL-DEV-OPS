@@ -22,6 +22,7 @@ function Home() {
 
   return (
     <div className={styles.container}>
+      
       {error && (
         <Toast
           title="Unable to load residences"

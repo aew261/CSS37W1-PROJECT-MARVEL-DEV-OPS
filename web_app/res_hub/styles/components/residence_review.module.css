@@ -16,17 +16,17 @@
 }
 
 .star_rating_wrapper {
-    //border: 2px solid yellow;
+    
 }
 
 .star_rating_wrapper p {
     font-size: 1.2rem;
     font-weight: bold;
-    //border: 2px solid red;
+    
 }
 
 .star_ratings {
-    //border: 2px solid blue;
+    
 }
 
 .ratingButton {
@@ -46,7 +46,7 @@
 
 
 .review_box_section {
-    //border: 2px solid red;
+    
     width: 70%;
     margin-top: 1%;
 }

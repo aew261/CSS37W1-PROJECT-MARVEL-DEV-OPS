@@ -1,9 +1,9 @@
-import { FaStar, FaRegHeart, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaStar, FaMapMarkerAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/components/residence_card.module.css';
 
 function ResidenceCard({ residence }) {
-  const { image_url, name, rating, status,id,overall_ratings, address } = residence;
+  const { image_url, name, status,id,overall_ratings, address } = residence;
 
   const statusClass =status === 'Verified' ? 'status-verified' : 'status-review';
   const navigate = useNavigate()
@@ -13,9 +13,6 @@ function ResidenceCard({ residence }) {
 
       <div className={styles.imageWrapper}>
         <img src={image_url} alt={name} className={styles.image} />
-        <button className={styles.heartBtn} aria-label="Save residence">
-          <FaRegHeart />
-        </button>
       </div>
 
       <div className={styles.body}>

@@ -134,7 +134,6 @@
 
 
 .suggestion_section {
-  //border: 2px solid red;
   position: absolute;
   top: 100%;
   left: 0;
@@ -146,7 +145,6 @@
 }
 
 .suggestion_card {
-
   display: flex;
   align-items: center;
   gap: 2%;

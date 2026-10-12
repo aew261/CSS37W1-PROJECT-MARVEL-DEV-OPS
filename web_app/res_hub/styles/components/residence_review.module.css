@@ -1,5 +1,5 @@
 .container {
-    //border: 2px solid blue;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,12 +7,12 @@
 }
 
 .rating_section {
-    //border: 2px solid red;
+    
     width: 70%;
 }
 
 .rating_wrapper {
-    //border: 2px solid green;
+    
 }
 
 .star_rating_wrapper {

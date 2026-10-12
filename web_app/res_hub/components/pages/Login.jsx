@@ -174,12 +174,6 @@ function Login() {
           )}
         </button>
 
-        <p
-          className={styles.switchAuth}
-          style={{ textAlign: 'right', marginTop: '1rem' }}
-        >
-          <Link to="/forgot-password">Forgot Password?</Link>
-        </p>
 
         <p  className={styles.switchAuth} 
             style={{ textAlign: 'right', marginTop: '1rem' }}>

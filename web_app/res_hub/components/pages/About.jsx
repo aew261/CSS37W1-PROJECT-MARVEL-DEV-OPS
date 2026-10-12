@@ -50,7 +50,7 @@ function FeatureIcon({ name }) {
   );
 }
 
-export default function About({ exploreHref = "/residences" }) {
+export default function About({ exploreHref = "/" }) {
   return (
     <main className={styles.aboutPage}>
 

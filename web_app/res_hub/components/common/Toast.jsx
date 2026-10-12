@@ -1,45 +1,50 @@
-import { useEffect, useState } from 'react'
-import toastSt from '../../styles/components/Toast.module.css'
 
-function Toast({ title, content,type }) {
+import { useEffect, useState } from 'react';
+import toastSt from '../../styles/components/Toast.module.css';
 
-    const [showToast, setShowToast]=useState(false)
-    
-    useEffect(()=>{
-        if(content && (type==="success" || type==="error")){
-            setShowToast(true)
-        }
-    },[type, content])
+function Toast({ title, content, type }) {
+  const [showToast, setShowToast] = useState(false);
 
-    useEffect(() => {
-        if (!showToast) return;
+  useEffect(() => {
+    if (!content || !['success', 'error'].includes(type)) {
+      setShowToast(false);
+      return;
+    }
 
-        const timer = setTimeout(() => {
-            setShowToast(false);
-        }, 3000);
+    setShowToast(true);
 
-        return () => clearTimeout(timer);
-    }, [showToast]);
+    const timer = setTimeout(() => {
+      setShowToast(false);
+    }, 3500);
 
+    return () => clearTimeout(timer);
+  }, [title, content, type]);
 
-  return (<>
-    {showToast &&
-        (<div  className={toastSt.container} >
+  if (!showToast) return null;
 
-            <section  className={toastSt.toast}  >
-                
-                <div className={`${toastSt.toastIndicator} ${type === "success" ? toastSt.success : toastSt.error}`}>
+  return (
+    <div className={toastSt.container}>
+      <section
+        className={toastSt.toast}
+        role={type === 'error' ? 'alert' : 'status'}
+        aria-live={type === 'error' ? 'assertive' : 'polite'}
+      >
+        <div
+          className={`${toastSt.toastIndicator} ${
+            type === 'success' ? toastSt.success : toastSt.error
+          }`}
+        />
 
-                </div>
+        <div className={toastSt.toastContent}>
+          <p className={toastSt.toastTitle}>
+            {title || (type === 'error' ? 'Error' : 'Success')}
+          </p>
 
-                <div  className={toastSt.toastContent} >
-                    <p className={toastSt.toastTitle} >{title}</p>
-                    <p  className={toastSt.content} >{content}</p>
-                </div>
-            </section>
-
-        </div>)}
-  </>)
+          <p className={toastSt.content}>{content}</p>
+        </div>
+      </section>
+    </div>
+  );
 }
 
-export default Toast
+export default Toast;

@@ -7,6 +7,9 @@ import Layout from '../components/layout/Layout'
 
 import Login from '../components/pages/Login'
 import Signup from '../components/pages/Signup'
+import ForgotPassword from '../components/pages/ForgotPassword'
+import VerifyResetOTP from '../components/pages/VerifyResetOTP'
+import ResetPassword from '../components/pages/ResetPassword'
 import AdminDashboard from '../components/admin/AdminDashboard'
 import AdminLayout from '../components/admin/AdminLayout'
 import About from '../components/pages/About'
@@ -27,7 +30,22 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
+<Route path="/signup" element={<Signup />} />
+
+<Route
+path="/forgot-password"
+element={<ForgotPassword />}
+/>
+
+<Route
+path="/verify-reset-otp"
+element={<VerifyResetOTP />}
+/>
+
+<Route
+path="/reset-password"
+element={<ResetPassword />}
+/>
 
       <Route element={<ProtectedRoute />}>
       
